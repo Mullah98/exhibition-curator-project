@@ -19,10 +19,10 @@ export default function Navbar() {
                     <Link href="/" className="block">Home</Link>
                 </li>
                 <li className="py-2 hover:underline">
-                    <Link href="/page1" className="block">Page1</Link>
+                    <Link href="/page1" className="block">Artworks</Link>
                 </li>
                 <li className="py-2 hover:underline">
-                    <Link href="/page2" className="block">Page2</Link>
+                    <Link href="/page2" className="block">Exhibition</Link>
                 </li>
             </ul>
         </nav>
