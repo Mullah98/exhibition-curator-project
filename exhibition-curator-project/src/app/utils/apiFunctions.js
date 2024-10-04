@@ -14,7 +14,6 @@ export const fetchImagesFromHarvard = async() => {
     }
 }
 
-
 export const fetchPromises = () => {
     const objectIDs = [317877, 438003, 551786, 436492, 472562] // add all the object IDs
   
