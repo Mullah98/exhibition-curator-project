@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    images: {
+        domains: ['nrs.harvard.edu', 'collectionapi.metmuseum.org', 'images.metmuseum.org'],
+    }
+};
 
 export default nextConfig;
