@@ -5,8 +5,8 @@ const fetchImagesFromHarvard = async(url) => {
     const response = await fetch(url);
     const result = await response.json();
     return result.records
-    .filter(record => record.primaryimageurl !== null)
-    .map(record => ({...record, images: record.primaryimageurl}))
+    .filter(record => record.primaryimageurl & record.primaryimageurl !== "" | null)
+    .map(record => ({...record, image: record.primaryimageurl}))
 }
 
 const fetchImagesFromMet = async (ids, url) => {
@@ -14,8 +14,8 @@ const fetchImagesFromMet = async (ids, url) => {
     const promiseResults = await Promise.all(promiseArray);
     const result = await Promise.all(promiseResults.map(response => response.json()));
     return result
-    .filter(record => record.primaryImage !== "" | null)
-    .map(record => ({...record, id: record.objectID, images: record.primaryImage})) 
+    .filter(record => record.primaryImage & record.primaryImage !== "" | null)
+    .map(record => ({...record, id: record.objectID, image: record.primaryImage})) 
 }
 
 export const getImagesForHomepage = async() => {
@@ -27,16 +27,22 @@ export const getImagesForHomepage = async() => {
             fetchImagesFromHarvard(harvardUrl),
             fetchImagesFromMet(ids, metUrl),
         ]);
+        console.log('harvard:', harvardImages);
+        console.log('met:', metImages);
+        
         return [...harvardImages, ...metImages];
+        
     } catch(error) {
         console.log('Unable to get images', error);
     }
 }
 
 export const getSingleImage = async() => {
-    const harvardUrl = `https://api.harvardartmuseums.org/object/5240?apikey=${harvard_apiKey}`;
+    const harvardUrl = `https://api.harvardartmuseums.org/object/299940?apikey=${harvard_apiKey}`;
     const response = await fetch(harvardUrl);
     const result = await response.json();
-    // console.log(result);
     return result
 }
+
+// https://harvardartmuseums.org/collections/object/318663?position=318663
+// https://harvardartmuseums.org/collections/object/299940?position=299940

@@ -1,26 +1,13 @@
 'use client'
 import { useEffect, useState } from "react"
-import { getImagesForHomepage, getSingleImage } from "../utils/imagesForHomePage"
+import { getSingleImage } from "../utils/imagesForHomePage"
 import Image from "next/image";
+import Link from "next/link";
+import HomeCardSlider from "./homeCardSlider";
 
 export default function GalleryOverview() {
-    const [gallery, setGallery] = useState([]);
     const [singleArtwork, setSingleArtwork] = useState([])
     const [loading, setLoading] = useState(true)
-
-    // useEffect(() => {
-    //     const fetchImages = async () => {
-    //         const artworks = await getImagesForHomepage();
-
-    //         if(artworks) {
-    //             setGallery(artworks)
-    //         }
-    //     };
-    //     fetchImages();
-    // }, []);
-
-    // const firstimg = gallery[0]
-    // console.log(firstimg);
 
     useEffect(() => {
         const fetchImage = async () => {
@@ -40,7 +27,7 @@ export default function GalleryOverview() {
     }, [])
     
     return (
-        <div className="flex flex-col items-center w-full max-w-[800] mx-auto border-4 border-red-500">
+        <div className="flex flex-col items-center w-full max-w-[800] mx-auto">
             <div className="relative align-center">
             {loading ? (
                 <div className="flex items=center justify-center h-64">Loading image....</div>
@@ -56,10 +43,12 @@ export default function GalleryOverview() {
             ) : (
                 <p>No image found</p>
             )}
-            <h1 className="absolute bottom-0 right-0 text-white text-3xl p-4">View more artworks</h1>
+            <Link href="/artworks">
+            <h1 className="absolute bottom-0 right-0 text-white text-3xl p-4 cursor-pointer hover:underline transition">View more artworks</h1>
+            </Link>
             </div>
-            <div className="mt-4 text-center">
-                <h2>More items</h2>
+            <div className="mt-16 text-center">
+                <HomeCardSlider />
             </div>
         </div>
     )

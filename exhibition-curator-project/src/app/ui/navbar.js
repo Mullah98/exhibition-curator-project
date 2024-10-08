@@ -14,7 +14,7 @@ export default function Navbar() {
             <button className="block md:hidden focus:outline-none" onClick={toggleMenu}>
                 {isOpen ? 'X' : '☰'}
             </button>
-            <ul className={`md:flex md:space-x-12 ${isOpen ? 'block' : 'hidden'} absolute md:static bg-gray-800 md:bg-transparent w-full md:w-auto top-14 md:top-auto text-center`}>
+            <ul className={`md:flex md:space-x-12 ${isOpen ? 'block' : 'hidden'} absolute md:static bg-gray-800 md:bg-transparent w-full md:w-auto top-14 md:top-auto text-center text-2xl`}>
                 <li className="py-2 hover:underline">
                     <Link href="/" className="block">Home</Link>
                 </li>
