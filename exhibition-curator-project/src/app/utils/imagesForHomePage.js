@@ -26,12 +26,8 @@ export const getImagesForHomepage = async() => {
         const [harvardImages, metImages] = await Promise.all([
             fetchImagesFromHarvard(harvardUrl),
             fetchImagesFromMet(ids, metUrl),
-        ]);
-        console.log('harvard:', harvardImages);
-        console.log('met:', metImages);
-        
+        ]);        
         return [...harvardImages, ...metImages];
-        
     } catch(error) {
         console.log('Unable to get images', error);
     }
@@ -43,6 +39,3 @@ export const getSingleImage = async() => {
     const result = await response.json();
     return result
 }
-
-// https://harvardartmuseums.org/collections/object/318663?position=318663
-// https://harvardartmuseums.org/collections/object/299940?position=299940

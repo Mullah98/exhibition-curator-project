@@ -55,13 +55,23 @@ export default function HomeCardSlider() {
         slidesToScroll: 1,
         arrows: true,
         nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />
-    }   
+        prevArrow: <PrevArrow />,
+    };
+
+    console.log(gallery);
+    
 
     return (
         <div className="container mx-auto">
-            <h1 className="text-6xl m-10 text-center">Card Slider</h1>
-            <div className="relative">
+        <div className="bg-gray-100 p-6 sm:p-8 rounded-lg border border-gray-200 border-opacity-25 shadow-md">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl italic text-center text-gray-800">
+            {"\"Art is the elimination of the unnecessary\""}
+            </h1>
+            <h2 className="text-lg sm:text-xl md:text-2xl italic text-center text-gray-600 mt-3">
+            - Picasso
+            </h2>
+        </div>
+        <div className="relative">
             <Slider {...settings}>
                 {gallery.map((artwork) => (
                     <div key={artwork.id} className="p-4 flex justify-center">
