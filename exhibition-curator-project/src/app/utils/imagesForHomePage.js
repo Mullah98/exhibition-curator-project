@@ -5,7 +5,7 @@ const fetchImagesFromHarvard = async(url) => {
     const response = await fetch(url);
     const result = await response.json();
     return result.records
-    .filter(record => record.primaryimageurl & record.primaryimageurl !== "" | null)
+    .filter(record => record.primaryimageurl && record.primaryimageurl !== "" | null)
     .map(record => ({...record, image: record.primaryimageurl}))
 }
 
@@ -14,8 +14,8 @@ const fetchImagesFromMet = async (ids, url) => {
     const promiseResults = await Promise.all(promiseArray);
     const result = await Promise.all(promiseResults.map(response => response.json()));
     return result
-    .filter(record => record.primaryImage & record.primaryImage !== "" | null)
-    .map(record => ({...record, id: record.objectID, image: record.primaryImage})) 
+    .filter(record => record.primaryImageSmall && record.primaryImageSmall !== "" | null)
+    .map(record => ({...record, id: record.objectID, image: record.primaryImageSmall})) 
 }
 
 export const getImagesForHomepage = async() => {
