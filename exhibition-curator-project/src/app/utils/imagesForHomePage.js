@@ -26,7 +26,7 @@ export const getImagesForHomepage = async() => {
         const [harvardImages, metImages] = await Promise.all([
             fetchImagesFromHarvard(harvardUrl),
             fetchImagesFromMet(ids, metUrl),
-        ]);        
+        ]);
         return [...harvardImages, ...metImages];
     } catch(error) {
         console.log('Unable to get images', error);

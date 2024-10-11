@@ -8,7 +8,7 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FaArrowAltCircleRight } from "react-icons/fa";
 
 
-export default function HomeCardSlider() {
+export default function HomeCardSlider({ loading }) {
     const [gallery, setGallery] = useState([])
 
 
@@ -58,11 +58,12 @@ export default function HomeCardSlider() {
         prevArrow: <PrevArrow />,
     };
 
-    console.log(gallery);
-    
-
     return (
         <div className="container mx-auto">
+        {loading ? (
+            <div>Loading...</div>
+        ) : (
+        <>
         <div className="bg-gray-100 p-6 sm:p-8 rounded-lg border border-gray-200 border-opacity-25 shadow-md">
             <h1 className="text-4xl sm:text-5xl md:text-5xl italic text-center text-gray-800">
             {"\"Art is the elimination of the unnecessary\""}
@@ -93,6 +94,8 @@ export default function HomeCardSlider() {
                 ))}
         </Slider>
         </div>
+        </>
+    )}
         </div>
     )
 }

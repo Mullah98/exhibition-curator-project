@@ -56,10 +56,10 @@ export default function GalleryOverview() {
                 </div>
             </div>
             <div className="mt-16 text-center">
-                <HomeCardSlider />
+                <HomeCardSlider loading={loading} />
             </div>
             <div className="mt-16 text-center">
-                <ArtworkCollection />
+                <ArtworkCollection loading={loading} />
             </div>
         </div>
     )
