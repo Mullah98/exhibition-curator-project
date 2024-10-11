@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getCollections } from "../utils/getCollections";
 import Image from "next/image";
+import LoadingSpinner from "../ui/loading";
 
 
 export default function ArtworkCollection({ loading }) {
@@ -27,11 +28,13 @@ export default function ArtworkCollection({ loading }) {
     return (
         <div className="flex flex-col items-center w-full max-w-[800px] mb-10">
             {loading ? (
-                <div>Loading...</div>
+                <LoadingSpinner />
             ): (
             <>
-                <h1 className="text-3xl mb-8">Explore a range of collections...</h1>
-                <div className="grid grid-cols-3 w-full gap-6 ml-8 mr-8">
+            <h1 className="m-8 sm:m-10 md:m-12 lg:m-16 text-3xl sm:text-4xl md:text-5xl lg:text-5xl italic text-center text-gray-800 whitespace-normal md:whitespace-nowrap font-medium font-serif">
+                Explore a wide range of stunning collections...
+                </h1>
+                <div className="grid grid-cols-2 sm:grid-cols-3 w-full gap-6 ml-8 mr-8">
                 {allCollections.map(collection => (
                     <div 
                     key={collection.id}

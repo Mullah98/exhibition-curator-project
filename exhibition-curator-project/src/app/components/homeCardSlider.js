@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { FaArrowAltCircleRight } from "react-icons/fa";
+import LoadingSpinner from "../ui/loading";
 
 
 export default function HomeCardSlider({ loading }) {
@@ -54,29 +55,37 @@ export default function HomeCardSlider({ loading }) {
         slidesToShow: 3,
         slidesToScroll: 1,
         arrows: true,
+        responsive: [
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 2,
+                }
+            }
+        ],
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />,
     };
 
     return (
-        <div className="container mx-auto">
+        <div className="container max-w-screen-lg px-2">
         {loading ? (
-            <div>Loading...</div>
+            <LoadingSpinner />
         ) : (
         <>
-        <div className="bg-gray-100 p-6 sm:p-8 rounded-lg border border-gray-200 border-opacity-25 shadow-md">
-            <h1 className="text-4xl sm:text-5xl md:text-5xl italic text-center text-gray-800">
+        <div className="bg-gray-100 p-2 sm:p-4 md:p-6 rounded-lg border border-gray-200 border-opacity-25 shadow-md max-w-5xl mx-auto">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl italic text-center text-gray-800 whitespace-normal md:whitespace-nowrap">
             {"\"Art is the elimination of the unnecessary\""}
             </h1>
             <h2 className="text-lg sm:text-xl md:text-2xl italic text-center text-gray-600 mt-3">
             - Picasso
             </h2>
         </div>
-        <div className="relative">
+        <div className="relative mt-6">
             <Slider {...settings}>
                 {gallery.map((artwork) => (
                     <div key={artwork.id} className="p-4 flex justify-center">
-                    <div className="relative w-full max-w-xl h-96 shadow-lg border rounded-lg overflow-hidden flex items-center justify-center border-grey-100 cursor-pointer"> 
+                    <div className="relative w-full max-w-[220px] sm:max-w-xl h-72 sm:h-96 shadow-lg border rounded-lg overflow-hidden flex items-center justify-center border-grey-100 cursor-pointer"> 
                         <Image
                         src={artwork.image} 
                         alt={artwork.title} 
@@ -95,7 +104,7 @@ export default function HomeCardSlider({ loading }) {
         </Slider>
         </div>
         </>
-    )}
+        )}
         </div>
     )
 }

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HomeCardSlider from "./homeCardSlider";
 import ArtworkCollection from "./artworkCollection";
+import LoadingSpinner from "../ui/loading";
 
 export default function GalleryOverview() {
     const [singleArtwork, setSingleArtwork] = useState([])
@@ -28,11 +29,12 @@ export default function GalleryOverview() {
     }, [])
         
     return (
-        <div className="flex flex-col items-center w-full max-w-[800px] mx-auto">
+        <div className="flex flex-col items-center max-w-full lg:max-w-[1200px] mx-auto">
             <div className="relative align-center">
                 {loading ? (
-                    <div className="flex items-center justify-center h-64">Loading image....</div>
+                    <LoadingSpinner />
                 ) : singleArtwork?.primaryimageurl ? (
+                    <>
                     <Image 
                         src={singleArtwork?.primaryimageurl} 
                         alt={`image for ${singleArtwork.title}`} 
@@ -40,20 +42,20 @@ export default function GalleryOverview() {
                         className="object-cover"
                         placeholder="blur"
                         blurDataURL={singleArtwork.primaryimageurl}
-                        loading="lazy" 
-                    />
-                ) : (
-                    <p>No image found</p>
-                )}
-                <div className="absolute left-4 bottom-1/4 h-20 p-4 text-white max-w-[90%]">
-                    <h2 className="text-5xl font-bold">{singleArtwork.title}</h2> 
-                    <p className="text-xl mt-2">
+                        loading="lazy" />
+                    <div className="absolute left-4 bottom-1/4 h-20 p-4 text-white max-w-[90%]">
+                    <h2 className="text-5xl font-bold animate-fade-in-left">{singleArtwork.title}</h2> 
+                    <p className="text-xl mt-2 animate-fade-in-left">
                         Explore a stunning collection of artworks that inspire and captivate.
                     </p>
-                    <Link href="/artworks" className="text-lg text-blue-300 underline hover:text-blue-400">
+                    <Link href="/artworks" className="text-lg text-blue-300 underline hover:text-blue-400 animate-fade-in-left">
                         View the full collection
                     </Link>
                 </div>
+                </>
+                ) : (
+                    <p>No image found</p>
+                )}
             </div>
             <div className="mt-16 text-center">
                 <HomeCardSlider loading={loading} />
