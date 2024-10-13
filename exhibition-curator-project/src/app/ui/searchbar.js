@@ -2,12 +2,11 @@
 
 import { useState } from "react"
 
-export default function SearchBar() {
+export default function SearchBar({search, setSearch}) {
     const classifications = ['Drawings', 'Prints', 'Photographs', 'Paintings']
     const place = ['Africa', 'Europe', 'South America', 'North America', 'Central Asia', 'Middle East']
     const culture = ['British', 'America', 'Italian', 'Spanish', 'German', 'Japanese', 'Arabian', 'Greek']
 
-    const [searchTerm, setSearchTerm] = useState('');
     const [dropdown1, setDropdown1] = useState('');
     const [dropdown2, setDropdown2] = useState('');
     const [dropdown3, setDropdown3] = useState('');
@@ -16,7 +15,7 @@ export default function SearchBar() {
     const [clickFilterBtn, setClickFilterBtn] = useState(false)
 
     const handleChange = (e) => {
-        setSearchTerm(e.target.value)
+        setSearch(e.target.value)
     }
 
     return (
@@ -24,15 +23,15 @@ export default function SearchBar() {
             <input 
             type="text" 
             placeholder="search..." 
-            value={searchTerm} 
+            value={search} 
             onChange={handleChange} 
             className="w-3/4 sm:w-2/4 p-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">    
             </input>
 
             <button 
             onClick={() => setClickFilterBtn(prev => !prev)}
-            className="bg-gray-100 hover:bg-gray-200 p-2 my-4 font-semibold rounded transition-colors duration-300"
-            >filter</button>
+            className="bg-gray-100 hover:bg-gray-200 p-2 my-4 font-semibold rounded transition-colors duration-300">
+            filter</button>
 
             {clickFilterBtn && (
             <div className="w-full max-w-md flex flex-col sm:flex-row gap-4 sm:gap-1">
@@ -40,27 +39,27 @@ export default function SearchBar() {
                 value={dropdown1} 
                 onChange={(e) => setDropdown1(e.target.value)} 
                 className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                {classifications.map((value, i) => (
+                    <option key={i} value={value}>{value}</option>
+                ))}
                 </select>
 
                 <select 
                 value={dropdown2} 
                 onChange={(e) => setDropdown2(e.target.value)} 
                 className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                {place.map((value, i) => (
+                    <option key={i} value={value}>{value}</option>
+                ))}
                 </select>
 
                 <select 
                 value={dropdown3} 
                 onChange={(e) => setDropdown3(e.target.value)} 
                 className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                {culture.map((value, i) => (
+                    <option key={i} value={value}>{value}</option>
+                ))}
                 </select>
 
                 <select 
