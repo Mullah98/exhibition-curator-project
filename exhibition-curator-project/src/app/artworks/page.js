@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import SearchBar from "../ui/searchbar"
 import { fetchImagesFromHarvard } from "../utils/apiFunctions"
 import LoadingSpinner from "../ui/loading"
+import Card from "../components/card"
 
 export default function Artworks() {
     const [allArtworks, setAllArtworks] = useState([])
@@ -11,29 +12,36 @@ export default function Artworks() {
 
     useEffect(() => {
         const getAllArtworks = async() => {
-            const response = await fetchImagesFromHarvard();
-            if (Array.isArray(response)) {
-                setAllArtworks(response)
+            try {
+                const response = await fetchImagesFromHarvard();
+                if (Array.isArray(response)) {
+                    const data = response?.filter(resp => resp.primaryimageurl !== "" | null)
+                    setAllArtworks(data)
+                }
+            } catch(error) {
+                console.log('Cant get all artworks', error);
+            } finally {
                 setLoading(false)
             }
-        }
+        };
         getAllArtworks()
     }, [])
 
-    console.log(allArtworks);
-    // console.log(search);
-    
 
     return (
         <>
         <SearchBar searchTerm={search} setSearch={setSearch}/>
-        {allArtworks ? (
-            <div>
+        <div className="flex justify-center">
+        {loading ? (
+            <LoadingSpinner />
+        ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 p-8 max-w-screen-xl">
             {allArtworks.map(art => (
-                <div key={art.id}>{art.title}</div>
+                <Card key={art.id} image={art.primaryimageurl} title={art.title} />
             ))}
             </div>
-        ) : <div><LoadingSpinner /></div>}
+        )}
+        </div>
         </>
     )
 }

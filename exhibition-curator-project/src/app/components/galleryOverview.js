@@ -8,16 +8,14 @@ import ArtworkCollection from "./artworkCollection";
 import LoadingSpinner from "../ui/loading";
 
 export default function GalleryOverview() {
-    const [singleArtwork, setSingleArtwork] = useState([])
+    const [singleArtwork, setSingleArtwork] = useState(null)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchImage = async () => {
             try {
                 const artwork = await getSingleImage();
-                if (artwork) {
-                    setSingleArtwork(artwork)
-                }
+                setSingleArtwork(artwork)
             } catch(error) {
                 console.log('Error fetching artwork', error);
                 
@@ -36,19 +34,22 @@ export default function GalleryOverview() {
                 ) : singleArtwork?.primaryimageurl ? (
                     <>
                     <Image 
-                        src={singleArtwork?.primaryimageurl} 
-                        alt={`image for ${singleArtwork.title}`} 
-                        width={900} height={250} 
-                        className="object-cover"
-                        placeholder="blur"
-                        blurDataURL={singleArtwork.primaryimageurl}
-                        loading="lazy" />
+                    src={singleArtwork?.primaryimageurl} 
+                    alt={`image for ${singleArtwork.title}`} 
+                    width={900} height={250} 
+                    className="object-cover"
+                    placeholder="blur"
+                    blurDataURL={singleArtwork.primaryimageurl}
+                    priority />
                     <div className="absolute left-4 bottom-1/4 h-20 p-4 text-white max-w-[90%]">
-                    <h2 className="text-5xl font-bold animate-fade-in-left">{singleArtwork.title}</h2> 
+                    <h2 className="text-5xl font-bold animate-fade-in-left">
+                    {singleArtwork.title}
+                    </h2> 
                     <p className="text-xl mt-2 animate-fade-in-left">
                         Explore a stunning collection of artworks that inspire and captivate.
                     </p>
-                    <Link href="/artworks" className="text-lg text-blue-300 underline hover:text-blue-400 animate-fade-in-left">
+                    <Link href="/artworks" 
+                    className="text-lg text-blue-300 underline hover:text-blue-400 animate-fade-in-left">
                         View the full collection
                     </Link>
                 </div>
