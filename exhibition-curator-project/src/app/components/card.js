@@ -6,19 +6,19 @@ export default function Card({ image, title }) {
         title: title,
     }
     return (
-    <div className="border border-gray-300 rounded-lg overflow-hidden h-80 w-64 flex flex-col">
-        <div className="relative flex-grow">
+    <div className="rounded-lg overflow-hidden h-96 w-72 flex flex-col cursor-pointer transform transition duration-500 hover:border-2 border-gray-700 hover:-translate-y-2">
+        <div className="relative flex-grow border-b-2 border-gray-700">
         {image ? (
             <Image 
             src={props.image} 
             alt={`Image for ${props.title}`} 
             layout="fill"
             objectFit="cover"
-            className="rounded-t-lg"/>
+            className="rounded-t-lg transition-transform duration-500 transform hover:scale-95" />
         ) : (<p>No image</p>)}
         </div>
         <div className="border-t border-gray-300 text-center p-2">
-            <h4>{props.title}</h4>
+            <h4 className="text-base font-bold break-words">{props.title}</h4>
         </div>
     </div>
     )

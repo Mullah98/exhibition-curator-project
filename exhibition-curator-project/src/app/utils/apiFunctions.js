@@ -1,7 +1,7 @@
 const harvard_API_KEY = '57c592c3-71a8-4c92-bda9-a4b0215968ec';
 
 export const fetchImagesFromHarvard = async() => {
-    const url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&size=60&classification=Drawings`;
+    const url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&size=100&classification=Drawings`;
     try {
         const response = await fetch(url);
         const data = await response.json();

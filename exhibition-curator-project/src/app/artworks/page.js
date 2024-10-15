@@ -15,7 +15,7 @@ export default function Artworks() {
             try {
                 const response = await fetchImagesFromHarvard();
                 if (Array.isArray(response)) {
-                    const data = response?.filter(resp => resp.primaryimageurl !== "" | null)
+                    const data = response?.filter(resp => resp.primaryimageurl && resp.primaryimageurl !== "" || null)
                     setAllArtworks(data)
                 }
             } catch(error) {
@@ -27,6 +27,8 @@ export default function Artworks() {
         getAllArtworks()
     }, [])
 
+    console.log(allArtworks);
+    
 
     return (
         <>
