@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react"
 import SearchBar from "../ui/searchbar"
 import { fetchImagesFromHarvard } from "../utils/apiFunctions"
-import LoadingSpinner from "../ui/loading"
+// import LoadingSpinner from "../ui/loading"
 import Card from "../components/card"
+import LoadingCard from "../ui/loadingcard"
 
 export default function Artworks() {
     const [allArtworks, setAllArtworks] = useState([])
@@ -21,21 +22,19 @@ export default function Artworks() {
             } catch(error) {
                 console.log('Cant get all artworks', error);
             } finally {
-                setLoading(false)
+                // setLoading(false)
+                setTimeout(() => setLoading(false), 3000)
             }
         };
         getAllArtworks()
     }, [])
-
-    console.log(allArtworks);
-    
 
     return (
         <>
         <SearchBar searchTerm={search} setSearch={setSearch}/>
         <div className="flex justify-center">
         {loading ? (
-            <LoadingSpinner />
+            <LoadingCard />
         ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 p-8 max-w-screen-xl">
             {allArtworks.map(art => (
