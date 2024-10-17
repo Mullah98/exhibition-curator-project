@@ -18,7 +18,6 @@ export default function GalleryOverview() {
                 setSingleArtwork(artwork)
             } catch(error) {
                 console.log('Error fetching artwork', error);
-                
             } finally {
                 setLoading(false)
             }
@@ -59,10 +58,10 @@ export default function GalleryOverview() {
                 )}
             </div>
             <div className="mt-16 text-center">
-                <HomeCardSlider loading={loading} />
+                <HomeCardSlider />
             </div>
             <div className="mt-16 text-center">
-                <ArtworkCollection loading={loading} />
+                <ArtworkCollection />
             </div>
         </div>
     )

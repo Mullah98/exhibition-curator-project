@@ -4,8 +4,9 @@ import Image from "next/image";
 import LoadingSpinner from "../ui/loading";
 
 
-export default function ArtworkCollection({ loading }) {
+export default function ArtworkCollection() {
     const [allCollections, setAllCollections] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchCollections = async () => {
@@ -16,7 +17,8 @@ export default function ArtworkCollection({ loading }) {
                 }
             } catch(error) {
                 console.log(error);
-                
+            } finally {
+                setLoading(false)
             }
         };
         fetchCollections();
