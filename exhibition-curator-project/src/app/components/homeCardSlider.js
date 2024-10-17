@@ -9,8 +9,9 @@ import { FaArrowAltCircleRight } from "react-icons/fa";
 import LoadingSpinner from "../ui/loading";
 
 
-export default function HomeCardSlider({ loading }) {
+export default function HomeCardSlider() {
     const [gallery, setGallery] = useState([])
+    const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
@@ -22,6 +23,8 @@ export default function HomeCardSlider({ loading }) {
                 }
             } catch(error) {
                 console.log('Error fetching artworks', error);
+            } finally {
+                setLoading(false)
             }
         };
         fetchImages();
