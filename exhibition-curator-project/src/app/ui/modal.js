@@ -1,18 +1,44 @@
+'use client'
 import Image from "next/image";
+import { Skeleton } from "./skeleton";
+import { useState, useEffect } from "react";
 
 export default function Modal({handleShowModal, selectedArtwork}) {
+    const [isLoading, setIsLoading] = useState(true)
+    const isModalOpen = true
+
+    useEffect(() => {
+        if (selectedArtwork) {
+            setIsLoading(false);
+        } else {
+            setIsLoading(true);
+        }
+    }, [selectedArtwork]);
+
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto'; 
+        };
+    }, [isModalOpen]);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm">
             <div className="relative w-[80%] h-[80%] flex bg-white rounded-lg overflow-hidden"
             onClick={(e) => e.stopPropagation()}>
                 <div className="w-1/2 h-full relative">
-                    {selectedArtwork && (
+                    {isLoading ? (
+                        <Skeleton className="h-full w-full bg-gray-300 animation-pulse" />
+                    ) : (
                         <Image
                         src={selectedArtwork.primaryimageurl}
                         alt={`Image for ${selectedArtwork.id}`}
-                        layout="fill"
-                        objectFit="contain"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-contain"
                         priority />
                     )}

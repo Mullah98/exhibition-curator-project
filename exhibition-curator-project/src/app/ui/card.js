@@ -19,7 +19,7 @@ export default function Card({ image, title, handleShowModal }) {
             className="rounded-t-lg transition-transform duration-500 transform hover:scale-95"
             priority />
         ) : (
-            <img src={placeholderImage} alt="placeholder image" />
+            <Image src={placeholderImage} alt="placeholder image" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
             )}
         </div>
         <div className="border-t border-gray-300 text-center p-2">
