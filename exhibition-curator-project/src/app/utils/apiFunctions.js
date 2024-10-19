@@ -13,8 +13,13 @@ export const fetchImagesFromHarvard = async() => {
     }
 }
 
-export const fetchImagesFromHarvardByDepartment = async (classification, culture, century) => {
-    let url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&size=150&classification=${classification}`
+export const fetchImagesFromHarvardByDepartment = async (classification, culture, century, technique, medium) => {
+    // let url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&size=150&classification=${classification}&division=Islamic%20Art`
+    let url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}`
+
+    if (classification) {
+        url += (`&classification=${encodeURIComponent(classification)}`)
+    }
 
     if (culture) {
         url += (`&culture=${culture}`)
@@ -24,6 +29,14 @@ export const fetchImagesFromHarvardByDepartment = async (classification, culture
         url += (`&century=${encodeURIComponent(century)}`)
     }
 
+    if (technique) {
+        url += (`&technique=${encodeURIComponent(technique)}`)
+    }
+
+    if (medium) {
+        url += (`&medium=${encodeURIComponent(medium)}`)
+    }
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -31,8 +44,7 @@ export const fetchImagesFromHarvardByDepartment = async (classification, culture
         }
         const data = await response.json();
         const artworks = data.records.filter(record => record.imagecount > 0 && record.primaryimageurl)
-        // console.log(url);
-        
+        console.log(url);
         return artworks
     } catch (error) {
         console.log('No response', error);

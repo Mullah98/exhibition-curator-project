@@ -1,12 +1,13 @@
 'use client'
-
 import { useState } from "react"
 
 export default function SearchBar({search, setSearch, handleFilter}) {
-    const classifications = ['Drawings', 'Prints', 'Photographs', 'Paintings']
-    const culture = ['British', 'American', 'Italian', 'Spanish', 'German', 'Japanese', 'Arabian', 'Greek', 'Chinese', 'Korean']
-    const century = ['16th century', '17th century', '18th century', '19th century', '20th century']
-
+    const classification = ['Drawings', 'Prints', 'Photographs', 'Paintings', 'Sculpture', 'Textiles', 'Ceramics', 'Jewelry', 'Furniture', 'Manuscripts', 'Medals', 'Coins', 'Glass', 'Arms and Armor', 'Tools and Equipment', 'Books']
+    const culture = ['British', 'American', 'Italian', 'Spanish', 'German', 'Japanese', 'Arabian', 'Greek', 'Chinese', 'Korean', 'French', 'Indian', 'Russian', 'African', 'Indigenous', 'Persian', 'Mexican', 'Egyptian', 'Dutch']
+    const century = ['13th century', '14th century', '15th century', '16th century', '17th century', '18th century', '19th century', '20th century', '21st century']
+    const technique = ['Oil Painting', 'Watercolor', 'Acrylic', 'Pastel', 'Charcoal', 'Ink Wash', 'Collage', 'Printmaking', 'Etching', 'Woodcut', 'Sculpture', 'Mixed Media', 'Fresco', 'Digital Art', 'Mosaic', 'Graffiti']
+    const medium = ['Oil', 'Watercolor', 'Ink', 'Charcoal', 'Pastel', 'Ceramic', 'Stone', 'Glass', 'Metal', 'Mixed media'];
+    
     const [dropdown1, setDropdown1] = useState('');
     const [dropdown2, setDropdown2] = useState('');
     const [dropdown3, setDropdown3] = useState('');
@@ -19,7 +20,15 @@ export default function SearchBar({search, setSearch, handleFilter}) {
     }
 
     const applyFilter = () => {
-        handleFilter(dropdown1, dropdown2, dropdown3)
+        handleFilter(dropdown1, dropdown2, dropdown3, dropdown4, dropdown5)
+    }
+
+    const handleClearButton = () => {
+        setDropdown1('')
+        setDropdown2('')
+        setDropdown3('')
+        setDropdown4('')
+        setDropdown5('')
     }
 
     return (
@@ -38,13 +47,13 @@ export default function SearchBar({search, setSearch, handleFilter}) {
             filter</button>
 
             {clickFilterBtn && (
-            <div className="w-full max-w-2xl flex flex-col sm:flex-row gap-6 sm:gap-4">
+                <div className={`w-full max-w-2xl flex flex-col sm:flex-row gap-6 sm:gap-4 ${clickFilterBtn ? 'slide-down' : 'slide-up'}`}>
                 <select 
                 value={dropdown1} 
                 onChange={(e) => setDropdown1(e.target.value)} 
                 className="w-64 p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <option value="">Classification</option>
-                {classifications.map((value, i) => (
+                {classification.map((value, i) => (
                     <option key={i} value={value}>{value}</option>
                 ))}
                 </select>
@@ -72,22 +81,25 @@ export default function SearchBar({search, setSearch, handleFilter}) {
                 <select 
                 value={dropdown4} 
                 onChange={(e) => setDropdown4(e.target.value)} 
-                className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                className="w-64 p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="">Technique</option>
+                {technique.map((value, i) => (
+                    <option key={i} value={value}>{value}</option>
+                ))}
                 </select>
 
                 <select 
                 value={dropdown5} 
                 onChange={(e) => setDropdown5(e.target.value)} 
-                className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                className="w-64 p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="">Medium</option>
+                {medium.map((value, i) => (
+                    <option key={i} value={value}>{value}</option>
+                ))}
                 </select>
 
-                <button className="rounded bg-gray-500" onClick={applyFilter}>Apply filter</button>
+                <button className="w-48 p-2 text-white whitespace-nowrap rounded bg-gray-500 hover:text-black hover:bg-gray-300" onClick={handleClearButton}>Clear</button>
+                <button className="w-48 p-2 text-white whitespace-nowrap rounded bg-gray-500 hover:text-black hover:bg-gray-300" onClick={applyFilter}>Apply filter</button>
             </div>
             )}
 

@@ -41,6 +41,38 @@ body {
   .animate-fade-in-left {
     animation: fade-in-left 1.4s ease forwards;
   }
+
+  @keyframes slide-down {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 500px; /* Adjust based on content */
+        opacity: 1;
+    }
+}
+
+.slide-down {
+    animation: slide-down 0.7s ease forwards;
+    overflow: hidden; /* Ensures content is clipped */
+}
+
+@keyframes slide-up {
+    from {
+        max-height: 500px; /* Same as the slide-down to start */
+        opacity: 1;
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
+.slide-up {
+    animation: slide-up 0.7s ease forwards;
+    overflow: hidden; /* Ensures content is clipped */
+}
 }
 
 @layer base {

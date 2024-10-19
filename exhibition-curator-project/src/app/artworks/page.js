@@ -24,7 +24,7 @@ export default function Artworks() {
                     setLoading(false)
                 }
             } catch(error) {
-                console.log('Cant get all artworks', error);
+                console.log('Cannot get all artworks', error);
             }
         };
         getAllArtworks()
@@ -35,12 +35,16 @@ export default function Artworks() {
         setShowModal(!showModal)        
     }
 
-    const handleFilter = async (classification, culture, century) =>{
-        const filtered = await fetchImagesFromHarvardByDepartment(classification, culture, century)
+    const handleFilter = async (classification, culture, century, technique, medium) =>{
+        const filtered = await fetchImagesFromHarvardByDepartment(classification, culture, century, technique, medium)
         setAllArtworks(filtered)
     }
 
-    console.log('Amount of artworks:', allArtworks);    
+    console.log('Artworks:', allArtworks);    
+    // console.log('Division', allArtworks.map(art => art.division));
+    // console.log('Medium', allArtworks.map(art => art.medium));
+    
+    
     
     return (
         <>
