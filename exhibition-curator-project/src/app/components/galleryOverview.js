@@ -24,6 +24,12 @@ export default function GalleryOverview() {
         }
         fetchImage();
     }, [])
+
+    if (!singleArtwork) {
+        return (
+            <div><h2>Error happened</h2></div>
+        )
+    }
         
     return (
         <div className="flex flex-col items-center max-w-full lg:max-w-[1200px] mx-auto">

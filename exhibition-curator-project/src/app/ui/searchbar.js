@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 
-export default function SearchBar({search, setSearch}) {
+export default function SearchBar({search, setSearch, handleFilter}) {
     const classifications = ['Drawings', 'Prints', 'Photographs', 'Paintings']
-    const place = ['Africa', 'Europe', 'South America', 'North America', 'Central Asia', 'Middle East']
-    const culture = ['British', 'America', 'Italian', 'Spanish', 'German', 'Japanese', 'Arabian', 'Greek']
+    const culture = ['British', 'American', 'Italian', 'Spanish', 'German', 'Japanese', 'Arabian', 'Greek', 'Chinese', 'Korean']
+    const century = ['16th century', '17th century', '18th century', '19th century', '20th century']
 
     const [dropdown1, setDropdown1] = useState('');
     const [dropdown2, setDropdown2] = useState('');
@@ -16,6 +16,10 @@ export default function SearchBar({search, setSearch}) {
 
     const handleChange = (e) => {
         setSearch(e.target.value)
+    }
+
+    const applyFilter = () => {
+        handleFilter(dropdown1, dropdown2, dropdown3)
     }
 
     return (
@@ -34,11 +38,12 @@ export default function SearchBar({search, setSearch}) {
             filter</button>
 
             {clickFilterBtn && (
-            <div className="w-full max-w-md flex flex-col sm:flex-row gap-4 sm:gap-1">
+            <div className="w-full max-w-2xl flex flex-col sm:flex-row gap-6 sm:gap-4">
                 <select 
                 value={dropdown1} 
                 onChange={(e) => setDropdown1(e.target.value)} 
-                className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                className="w-64 p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="">Classification</option>
                 {classifications.map((value, i) => (
                     <option key={i} value={value}>{value}</option>
                 ))}
@@ -47,8 +52,9 @@ export default function SearchBar({search, setSearch}) {
                 <select 
                 value={dropdown2} 
                 onChange={(e) => setDropdown2(e.target.value)} 
-                className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                {place.map((value, i) => (
+                className="w-64 p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="">Culture</option>
+                {culture.map((value, i) => (
                     <option key={i} value={value}>{value}</option>
                 ))}
                 </select>
@@ -56,8 +62,9 @@ export default function SearchBar({search, setSearch}) {
                 <select 
                 value={dropdown3} 
                 onChange={(e) => setDropdown3(e.target.value)} 
-                className="w-full p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                {culture.map((value, i) => (
+                className="w-64 p-2 mb-1 sm:mb-0 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                <option value="">Century</option>
+                {century.map((value, i) => (
                     <option key={i} value={value}>{value}</option>
                 ))}
                 </select>
@@ -79,6 +86,8 @@ export default function SearchBar({search, setSearch}) {
                 <option value="2">Option 2</option>
                 <option value="3">Option 3</option>
                 </select>
+
+                <button className="rounded bg-gray-500" onClick={applyFilter}>Apply filter</button>
             </div>
             )}
 

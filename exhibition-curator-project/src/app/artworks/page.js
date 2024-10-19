@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import SearchBar from "../ui/searchbar"
-import { fetchImagesFromHarvard } from "../utils/apiFunctions"
+import { fetchImagesFromHarvard, fetchImagesFromHarvardByDepartment } from "../utils/apiFunctions"
 // import LoadingSpinner from "../ui/loading"
 import Card from "../ui/card"
 import LoadingCard from "../ui/loadingcard"
@@ -33,11 +33,19 @@ export default function Artworks() {
     const handleShowModal = (artwork) => {
         setSelectedArtwork(artwork)
         setShowModal(!showModal)        
-    }    
+    }
+
+    const handleFilter = async (classification, culture, century) =>{
+        const filtered = await fetchImagesFromHarvardByDepartment(classification, culture, century)
+        setAllArtworks(filtered)
+    }
+
+    console.log('Amount of artworks:', allArtworks);    
     
     return (
         <>
-        <SearchBar searchTerm={search} setSearch={setSearch}/>
+        <SearchBar searchTerm={search} setSearch={setSearch} handleFilter={handleFilter} />
+        <div className="flex justify-center align-center p-4">Showing {allArtworks.length} objects</div>
         <div className="flex justify-center">
         {loading ? (
             <LoadingCard />
