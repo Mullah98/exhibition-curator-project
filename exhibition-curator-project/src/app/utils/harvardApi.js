@@ -14,7 +14,6 @@ export const fetchImagesFromHarvard = async() => {
 }
 
 export const fetchImagesFromHarvardByDepartment = async (classification, culture, century, technique, medium) => {
-    // let url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&size=150&classification=${classification}&division=Islamic%20Art`
     let url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}`
 
     if (classification) {
@@ -44,11 +43,28 @@ export const fetchImagesFromHarvardByDepartment = async (classification, culture
         }
         const data = await response.json();
         const artworks = data.records.filter(record => record.imagecount > 0 && record.primaryimageurl)
-        console.log(url);
+        // console.log(url);
         return artworks
     } catch (error) {
         console.log('No response', error);
         
+    }
+}
+
+export const SearchImagesFromHarvard = async(query) => {
+    let url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&q=${query}`
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new error('Bad req')
+        }
+        const data = await response.json();
+        const artworks = data.records.filter(record => record.imagecount > 0 && record.primaryimageurl)
+        return artworks
+    } catch (error) {
+        console.log('No response', error)
+        return []
     }
 }
 

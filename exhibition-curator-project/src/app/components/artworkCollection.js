@@ -22,10 +22,7 @@ export default function ArtworkCollection() {
             }
         };
         fetchCollections();
-    }, [])
-
-    // console.log('all collections:', allCollections.map(collection => collection.department));
-    
+    }, [])    
 
     return (
         <div className="flex flex-col items-center w-full max-w-[800px] mb-10">
@@ -34,7 +31,7 @@ export default function ArtworkCollection() {
             ): (
             <>
             <h1 className="m-8 sm:m-10 md:m-12 lg:m-16 text-3xl sm:text-4xl md:text-5xl lg:text-5xl italic text-center text-gray-800 whitespace-normal md:whitespace-nowrap font-medium font-serif">
-                Explore a wide range of stunning collections...
+                Explore a wide range of astonishing collections...
                 </h1>
                 <div className="grid grid-cols-2 sm:grid-cols-3 w-full gap-6 ml-8 mr-8">
                 {allCollections.map(collection => (

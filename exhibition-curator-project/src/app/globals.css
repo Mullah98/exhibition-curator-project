@@ -48,19 +48,19 @@ body {
         opacity: 0;
     }
     to {
-        max-height: 500px; /* Adjust based on content */
+        max-height: 200px;
         opacity: 1;
     }
 }
 
-.slide-down {
-    animation: slide-down 0.7s ease forwards;
-    overflow: hidden; /* Ensures content is clipped */
-}
+  .slide-down {
+      animation: slide-down 1s ease forwards;
+      overflow: hidden; 
+  }
 
 @keyframes slide-up {
     from {
-        max-height: 500px; /* Same as the slide-down to start */
+        max-height: 200px;
         opacity: 1;
     }
     to {
@@ -69,10 +69,11 @@ body {
     }
 }
 
-.slide-up {
-    animation: slide-up 0.7s ease forwards;
-    overflow: hidden; /* Ensures content is clipped */
-}
+  .slide-up {
+      animation: slide-up 1s ease forwards;
+      overflow: hidden;
+  }
+
 }
 
 @layer base {

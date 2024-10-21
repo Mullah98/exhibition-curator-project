@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import { getImagesForHomepage } from "../utils/imagesForHomePage";
 import Image from "next/image";
@@ -89,6 +90,7 @@ export default function HomeCardSlider() {
                 {gallery.map((artwork) => (
                     <div key={artwork.id} className="p-4 flex justify-center">
                     <div className="relative w-full max-w-[220px] sm:max-w-xl h-72 sm:h-96 shadow-lg border rounded-lg overflow-hidden flex items-center justify-center border-grey-100 cursor-pointer"> 
+                    {artwork.image ? (
                         <Image
                         src={artwork.image} 
                         alt={artwork.title} 
@@ -97,6 +99,9 @@ export default function HomeCardSlider() {
                         className="object-contain w-full h-full rounded-lg transition-opacity duration-300 hover:opacity-50"
                         loading="lazy"
                         />
+                    ) : (
+                        <LoadingSpinner />
+                    )}
                     <div className="absolute flex flex-col inset-0 flex items-center justify-center bg-black bg-opacity-60 opacity-0 transition-opacity duration-300 hover:opacity-100 z-10">
                         <h3 className="text-white text-2xl">{artwork.title}</h3>
                         <p className="text-white text-xl">{artwork.people?.[0].name || artwork.artistDisplayName}</p>

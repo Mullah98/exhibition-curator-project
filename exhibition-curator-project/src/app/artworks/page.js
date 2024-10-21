@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
 import SearchBar from "../ui/searchbar"
-import { fetchImagesFromHarvard, fetchImagesFromHarvardByDepartment } from "../utils/apiFunctions"
+import { fetchImagesFromHarvard, fetchImagesFromHarvardByDepartment } from "../utils/harvardApi"
 // import LoadingSpinner from "../ui/loading"
 import Card from "../ui/card"
 import LoadingCard from "../ui/loadingcard"
@@ -40,16 +40,14 @@ export default function Artworks() {
         setAllArtworks(filtered)
     }
 
-    console.log('Artworks:', allArtworks);    
-    // console.log('Division', allArtworks.map(art => art.division));
-    // console.log('Medium', allArtworks.map(art => art.medium));
-    
-    
+    // console.log('Artworks:', allArtworks);    
     
     return (
         <>
         <SearchBar searchTerm={search} setSearch={setSearch} handleFilter={handleFilter} />
-        <div className="flex justify-center align-center p-4">Showing {allArtworks.length} objects</div>
+        <div className="flex justify-center align-center p-2 text-lg">
+        Showing <span className="font-semibold mx-1">{allArtworks.length}</span> objects
+        </div>
         <div className="flex justify-center">
         {loading ? (
             <LoadingCard />
