@@ -74,6 +74,21 @@ body {
       overflow: hidden;
   }
 
+  @keyframes title-move-up {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(-40px);
+    }
+  }
+  
+  .animate-title-move-up {
+    animation: title-move-up 1s ease forwards;
+  }
+  
 }
 
 @layer base {

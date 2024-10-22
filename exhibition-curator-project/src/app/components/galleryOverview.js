@@ -1,34 +1,16 @@
-'use client'
-import { useEffect, useState } from "react"
-import { getSingleImage } from "../utils/imagesForHomePage"
-import Image from "next/image";
-import Link from "next/link";
+'use client';
 import HomeCardSlider from "./homeCardSlider";
 import ArtworkCollection from "./artworkCollection";
 import LoadingSpinner from "../ui/loading";
 import SingleArtwork from "./singleArtwork";
 
-export default function GalleryOverview() {
-    const [singleArtwork, setSingleArtwork] = useState(null)
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        const fetchImage = async () => {
-            try {
-                const artwork = await getSingleImage();
-                setSingleArtwork(artwork)
-            } catch(error) {
-                console.log('Error fetching artwork', error);
-            } finally {
-                setLoading(false)
-            }
-        }
-        fetchImage();
-    }, [])
-        
+export default function GalleryOverview({ title }) {
     return (
         <div className="flex flex-col items-center max-w-full lg:max-w-[1200px] mx-auto">
-            <div className="relative align-center">
+          <h1 className="text-7xl mt-6 font-medium font-serif transition-all duration-700 animate-fade-in">
+            {title}
+          </h1>
+          <div className="relative align-center mt-10">
                 <SingleArtwork />
             </div>
             <div className="mt-16 text-center">
@@ -38,5 +20,5 @@ export default function GalleryOverview() {
                 <ArtworkCollection />
             </div>
         </div>
-    )
+    );
 }
