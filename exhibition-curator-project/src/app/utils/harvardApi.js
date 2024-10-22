@@ -57,10 +57,12 @@ export const SearchImagesFromHarvard = async(query) => {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new error('Bad req')
+            throw new Error('Bad req')
         }
         const data = await response.json();
-        const artworks = data.records.filter(record => record.imagecount > 0 && record.primaryimageurl)
+        const artworks = data.records
+        .filter(record => record.primaryimageurl && record.primaryimageurl !== "" | null)
+        .map(record => ({classification: record.classification, department: record.department, culture: record.culture, technique: record.technique, method: record.method}))
         return artworks
     } catch (error) {
         console.log('No response', error)

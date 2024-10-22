@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
+import { SearchImagesFromHarvard } from "../utils/harvardApi"
 
 export default function SearchBar({search, setSearch, handleFilter}) {
     const classification = ['Armor', 'Books', 'Costume', 'Drawings', 'Frames', 'Gems', 'Jewelry', 'Manuscripts', 'Mosaics', 'Paintings', 'Photographs', 'Prints', 'Sculpture', 'Textile Arts', 'Tools and Equipment']
@@ -15,9 +16,20 @@ export default function SearchBar({search, setSearch, handleFilter}) {
     const [dropdown4, setDropdown4] = useState('');
     const [dropdown5, setDropdown5] = useState('');
     const [clickFilterBtn, setClickFilterBtn] = useState(false)
+    const [suggestions, setSuggestions] = useState(null)
+    const [selectedSuggestion, setSelectedSuggestion] = useState([])
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         setSearch(e.target.value)
+
+        if (e.target.value) {
+            const results = await SearchImagesFromHarvard(e.target.value)
+            const unique = results.map(value => Object.values(value))
+            setSuggestions(unique)
+            console.log(unique);
+        } else {
+            setSuggestions([])
+        }
     }
 
     const applyFilter = () => {
@@ -41,6 +53,16 @@ export default function SearchBar({search, setSearch, handleFilter}) {
                 onChange={handleChange} 
                 className="w-3/4 sm:w-2/4 p-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">    
             </input>
+
+            {suggestions && suggestions.length > 0 && (
+                <ul className="absolute mt-12 z-10 bg-white border border-gray-300 rounded-md shadow-lg w-3/4 sm:w-2/4 border-2 border-red-500">
+                    {suggestions[0].map((suggestion, i) => (
+                        <li key={i} className="p-2 hover:bg-gray-200">
+                            <span>{suggestion}</span>
+                        </li>
+                    ))}
+                </ul>
+            )}
     
             <button 
                 onClick={() => setClickFilterBtn(prev => !prev)}
