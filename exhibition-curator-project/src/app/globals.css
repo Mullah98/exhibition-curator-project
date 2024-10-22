@@ -41,6 +41,39 @@ body {
   .animate-fade-in-left {
     animation: fade-in-left 1.4s ease forwards;
   }
+
+  @keyframes slide-down {
+    from {
+        max-height: 0;
+        opacity: 0;
+    }
+    to {
+        max-height: 200px;
+        opacity: 1;
+    }
+}
+
+  .slide-down {
+      animation: slide-down 1s ease forwards;
+      overflow: hidden; 
+  }
+
+@keyframes slide-up {
+    from {
+        max-height: 200px;
+        opacity: 1;
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+    }
+}
+
+  .slide-up {
+      animation: slide-up 1s ease forwards;
+      overflow: hidden;
+  }
+
 }
 
 @layer base {
