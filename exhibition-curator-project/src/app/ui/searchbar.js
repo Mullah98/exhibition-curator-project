@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { SearchImagesFromHarvard } from "../utils/harvardApi"
 
-export default function SearchBar({search, setSearch, handleFilter}) {
+export default function SearchBar({search, setSearch, handleFilter, setFilteredArtworks}) {
     const classification = ['Armor', 'Books', 'Costume', 'Drawings', 'Frames', 'Gems', 'Jewelry', 'Manuscripts', 'Mosaics', 'Paintings', 'Photographs', 'Prints', 'Sculpture', 'Textile Arts', 'Tools and Equipment']
     const culture = ['African', 'American', 'Arab', 'British', 'Chinese', 'Dutch', 'Egyptian', 'French', 'German', 'Greek', 'Indian', 'Indigenous', 'Italian', 'Japanese', 'Korean', 'Mexican', 'Persian', 'Russian', 'Spanish']
     const century = ['13th century', '14th century', '15th century', '16th century', '17th century', '18th century', '19th century', '20th century', '21st century']
@@ -16,19 +16,16 @@ export default function SearchBar({search, setSearch, handleFilter}) {
     const [dropdown4, setDropdown4] = useState('');
     const [dropdown5, setDropdown5] = useState('');
     const [clickFilterBtn, setClickFilterBtn] = useState(false)
-    const [suggestions, setSuggestions] = useState(null)
-    const [selectedSuggestion, setSelectedSuggestion] = useState([])
 
     const handleChange = async (e) => {
         setSearch(e.target.value)
 
         if (e.target.value) {
             const results = await SearchImagesFromHarvard(e.target.value)
-            const unique = results.map(value => Object.values(value))
-            setSuggestions(unique)
-            console.log(unique);
+            setFilteredArtworks(results)
         } else {
-            setSuggestions([])
+            setFilteredArtworks([])
+            return;
         }
     }
 
@@ -51,19 +48,9 @@ export default function SearchBar({search, setSearch, handleFilter}) {
                 placeholder="search..." 
                 value={search} 
                 onChange={handleChange} 
-                className="w-3/4 sm:w-2/4 p-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">    
+                className="w-3/4 sm:w-2/4 p-2 mb-4 border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400">
             </input>
 
-            {suggestions && suggestions.length > 0 && (
-                <ul className="absolute mt-12 z-10 bg-white border border-gray-300 rounded-md shadow-lg w-3/4 sm:w-2/4 border-2 border-red-500">
-                    {suggestions[0].map((suggestion, i) => (
-                        <li key={i} className="p-2 hover:bg-gray-200">
-                            <span>{suggestion}</span>
-                        </li>
-                    ))}
-                </ul>
-            )}
-    
             <button 
                 onClick={() => setClickFilterBtn(prev => !prev)}
                 className="bg-gray-100 hover:bg-gray-200 p-2 my-4 font-semibold rounded transition-colors duration-300">

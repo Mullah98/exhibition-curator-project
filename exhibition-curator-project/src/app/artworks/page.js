@@ -13,6 +13,7 @@ export default function Artworks() {
     const [loading, setLoading] = useState(true)
     const [showModal, setShowModal] = useState(false)
     const [selectedArtwork, setSelectedArtwork] = useState([])
+    const [searchResults, setSearchResults] = useState([])
 
     useEffect(() => {
         const getAllArtworks = async() => {
@@ -40,20 +41,18 @@ export default function Artworks() {
         setAllArtworks(filtered)
     }
 
-    // console.log('Artworks:', allArtworks);    
-    
     return (
         <>
-        <SearchBar searchTerm={search} setSearch={setSearch} handleFilter={handleFilter} />
+        <SearchBar searchTerm={search} setSearch={setSearch} handleFilter={handleFilter} setFilteredArtworks={setSearchResults} />
         <div className="flex justify-center align-center p-2 text-lg">
-        Showing <span className="font-semibold mx-1">{allArtworks.length}</span> objects
+        Showing <span className="font-semibold mx-1">{searchResults.length || allArtworks.length}</span> objects
         </div>
         <div className="flex justify-center">
         {loading ? (
             <LoadingCard />
         ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 p-8 max-w-screen-xl">
-            {allArtworks.map(art => (
+            {(searchResults.length > 0 ? searchResults : allArtworks).map(art => (
                 <Card key={art.id} image={art.primaryimageurl} title={art.title} handleShowModal={() => handleShowModal(art)} />
             ))}
             </div>
