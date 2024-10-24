@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 
 export default function Modal({handleShowModal, selectedArtwork}) {
     const [isLoading, setIsLoading] = useState(true)
+    const [isButtonClicked, setIsButtonClicked] = useState(false)
+    const [stored, setStored] = useState([])
+    const [alreadyAdded, setAlreadyAdded] = useState(false)
     const isModalOpen = true
 
     useEffect(() => {
@@ -26,6 +29,27 @@ export default function Modal({handleShowModal, selectedArtwork}) {
         };
     }, [isModalOpen]);
 
+    const handleClick = (art) => {
+        setIsButtonClicked(true);
+        
+        const existingCollection = JSON.parse(localStorage.getItem('artworks')) || []
+
+        existingCollection.push(art)
+        localStorage.setItem('artworks', JSON.stringify(existingCollection)); 
+    
+        const storedItems = (JSON.parse(localStorage.getItem('artworks'))) || [];
+        setStored(storedItems) 
+    };
+
+    const checkForArtworks = (art) => {
+       const existing = stored.map(collection => collection.id)
+       if (art.id === existing) {
+        setAlreadyAdded(true)
+        console.log(alreadyAdded);
+        
+       }
+    }    
+   
     return (
         <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm">
             <div className="relative w-[80%] h-[80%] flex bg-white rounded-lg overflow-hidden"
@@ -44,15 +68,15 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                     )}
                 </div>
 
-                <div className="w-1/2 h-full flex flex-col p-4">
+                <div className="w-1/2 h-full flex flex-col p-4 overflow-y-auto">
                     <div className="flex justify-end mb-4">
                         <button className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600" onClick={handleShowModal}>
                             Close
                         </button>
                     </div>
-                    <div className="flex-grow flex flex-cols justify-between mt-2">
+                    <div className="text-sm sm:text-base flex-grow flex flex-cols justify-between mt-2">
                         <div className="w-full max-w-3xl mx-auto">
-                            <h1 className="text-4xl font-bold mb-4">{selectedArtwork.title}</h1>
+                            <h1 className="text-2xl sm:text-4xl font-bold mb-4">{selectedArtwork.title}</h1>
                             <div className="space-y-1">
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Object Number</strong>
@@ -76,7 +100,7 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Medium</strong>
-                                    <p>{selectedArtwork.medium || 'unknown'}</p>
+                                    <p className="truncate text-overflow">{selectedArtwork.medium || 'unknown'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Period</strong>
@@ -86,9 +110,9 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                                     <strong className="mr-2">Dimension</strong>
                                     <p>{selectedArtwork.dimensions || 'unknown'}</p>
                                 </div>
-                                <div className="flex justify-between items-center border-b border-gray-300 py-2">
+                                <div className="flex justify-between items-center border-b border-gray-300 py-2 overflow-x-auto max-h-16">
                                     <strong className="mr-2">Credit Line</strong>
-                                    <p>{selectedArtwork.creditline || 'unknown'}</p>
+                                    <p className="whitespace-nowrap">{selectedArtwork.creditline || 'unknown'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Century</strong>
@@ -98,17 +122,23 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                                     <strong className="mr-2">Dated</strong>
                                     <p>{selectedArtwork.dated || 'unknown'}</p>
                                 </div>
-                                <div className="flex justify-between items-center border-b border-gray-300 py-2">
+                                <div className="flex justify-between items-center border-b border-gray-300 py-2 overflow-x-auto max-h-16">
                                     <strong className="mr-2">Contact</strong>
-                                    <p>{selectedArtwork.contact || 'unknown'}</p>
+                                    <p className="whitespace-nowrap">{selectedArtwork.contact || 'unknown'}</p>
                                 </div>
-                                <div className="flex justify-between items-center border-b border-gray-300 py-2">
+                                <div className="flex justify-between items-center border-b border-gray-300 py-2 overflow-x-auto max-h-16">
                                     <strong className="mr-2">Provenance</strong>
-                                    <p>{selectedArtwork.provenance || 'unknown'}</p>
+                                    <p className="whitespace-nowrap">{selectedArtwork.provenance || 'unknown'}</p>
                                 </div>
                             </div>
                             <div className="mt-12 text-center">
-                            <button className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600">Add to exhibition</button>
+                            <button 
+                            className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600"
+                            onClick={() => handleClick(selectedArtwork)}>
+                            {isButtonClicked ? 'Added to collection' : 'Add to collection'}
+                            </button>
+                            <button onClick={checkForArtworks(selectedArtwork)}>Check</button>
+                            <p>{alreadyAdded ? 'Added' : '---'}</p>
                             </div>
                         </div>
                     </div>

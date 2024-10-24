@@ -1,3 +1,6 @@
-export default function Exhibition() {
-    <h1>Exhibition Page</h1>
+export default function Exhibition() {    
+    return (
+        <h1>Exhibition Page</h1>
+    )
+    
 }
