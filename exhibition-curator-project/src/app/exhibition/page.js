@@ -1,13 +1,17 @@
 'use client'
 import { useEffect, useState } from "react";
+import ExhibitionSwiper from "../components/exhibitionSwiper";
 
 export default function Exhibition() { 
-        const [stored, setStored] = useState([])   
+        const [artworkCollection, setArtworkCollection] = useState([])   
 
         useEffect(() => {
             const collection = JSON.parse(localStorage.getItem('artworks')) || [];
-            setStored(collection)
+            setArtworkCollection(collection)
         }, [])
+
+        console.log(artworkCollection);
+        
 
         // useEffect(() => {
         //     const timer = setTimeout(() => {
@@ -20,14 +24,9 @@ export default function Exhibition() {
 
     
     return (
-        <div className="flex justify-center">
-        <h1 className="text-3xl">Total number of items: {stored.length}</h1>
-        {stored.map((item) => (
-            <div key={item.id}>
-            <h3>{item.id}</h3>
-            <h4>{item.title}</h4>
-            </div>
-        ))}
+        <div className="flex justify-center mt-14">
+        <p>Number of arts: {artworkCollection.length}</p>
+            <ExhibitionSwiper artworks={artworkCollection}/>
         </div>
     )
     
