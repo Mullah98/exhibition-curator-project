@@ -5,51 +5,35 @@ import { useState, useEffect } from "react";
 
 export default function Modal({handleShowModal, selectedArtwork}) {
     const [isLoading, setIsLoading] = useState(true)
-    const [isButtonClicked, setIsButtonClicked] = useState(false)
-    const [stored, setStored] = useState([])
     const [alreadyAdded, setAlreadyAdded] = useState(false)
     const isModalOpen = true
 
     useEffect(() => {
         if (selectedArtwork) {
-            setIsLoading(false);
-        } else {
-            setIsLoading(true);
+            setIsLoading(false)
+            checkForArtwork(selectedArtwork)
         }
-    }, [selectedArtwork]);
+    }, [selectedArtwork])
 
     useEffect(() => {
-        if (isModalOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-        return () => {
-            document.body.style.overflow = 'auto'; 
-        };
-    }, [isModalOpen]);
+        document.body.style.overflow = isModalOpen ? 'hidden' : 'auto';
+        return () => (document.body.style.overflow = 'auto')
+    }, [isModalOpen])
 
-    const handleClick = (art) => {
-        setIsButtonClicked(true);
-        
-        const existingCollection = JSON.parse(localStorage.getItem('artworks')) || []
+    const checkForArtwork = (artwork) => {
+        const storedItems = JSON.parse(localStorage.getItem('artworks')) || [];
+        setAlreadyAdded(storedItems.some(item => item.id === artwork.id))
+    }
 
-        existingCollection.push(art)
-        localStorage.setItem('artworks', JSON.stringify(existingCollection)); 
-    
-        const storedItems = (JSON.parse(localStorage.getItem('artworks'))) || [];
-        setStored(storedItems) 
-    };
+    const handleClick = (artwork) => {
+        const existingCollection = JSON.parse(localStorage.getItem('artworks')) || [];
+        if (alreadyAdded) return;
 
-    const checkForArtworks = (art) => {
-       const existing = stored.map(collection => collection.id)
-       if (art.id === existing) {
-        setAlreadyAdded(true)
-        console.log(alreadyAdded);
-        
-       }
-    }    
-   
+        existingCollection.push(artwork);
+        localStorage.setItem('artworks', JSON.stringify(existingCollection));
+        setAlreadyAdded(true)        
+    } 
+
     return (
         <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm">
             <div className="relative w-[80%] h-[80%] flex bg-white rounded-lg overflow-hidden"
@@ -134,11 +118,10 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                             <div className="mt-12 text-center">
                             <button 
                             className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600"
+                            disabled={alreadyAdded}
                             onClick={() => handleClick(selectedArtwork)}>
-                            {isButtonClicked ? 'Added to collection' : 'Add to collection'}
+                            {alreadyAdded ? 'Added to collection' : 'Add to collection'}
                             </button>
-                            <button onClick={checkForArtworks(selectedArtwork)}>Check</button>
-                            <p>{alreadyAdded ? 'Added' : '---'}</p>
                             </div>
                         </div>
                     </div>
