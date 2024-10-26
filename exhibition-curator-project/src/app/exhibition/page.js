@@ -22,28 +22,14 @@ export default function Exhibition() {
         // })
 
         const deleteArtwork = (artwork) => {
-
             const confirmOption = window.confirm('Are you sure you want to remove the artwork?')
 
             if (confirmOption) {
-
-            
             const updatedCollection = artworkCollection.filter(art => art.id !== artwork.id);
-
             setArtworkCollection(updatedCollection)
-
             localStorage.setItem('artworks', JSON.stringify(updatedCollection))
-
-            console.log('You clicked delete');
-
             }
-            
         }
-
-        console.log(artworkCollection);
-
-        
-
     
     return (
         <div className="flex justify-center mt-14">
