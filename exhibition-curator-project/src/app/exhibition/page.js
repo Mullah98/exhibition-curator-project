@@ -5,7 +5,7 @@ import { MdOutlineLightMode } from "react-icons/md";
 
 export default function Exhibition() { 
         const [artworkCollection, setArtworkCollection] = useState([])
-        const [timer, setTimer] = useState(3000)
+        const [timer, setTimer] = useState(1000)
         const [darkMode, setDarkMode] = useState(true);
 
         useEffect(() => {
@@ -13,22 +13,12 @@ export default function Exhibition() {
             setArtworkCollection(collection)
         }, [])
 
-        
-
-        // useEffect(() => {
-        //     const timer = setTimeout(() => {
-        //         localStorage.clear()
-        //         window.location.reload();
-        //     }, 5000)
-
-        //     return () => clearTimeout(timer)
-        // })
-
         useEffect(() => {
             const interval = setInterval(() => {
                 setTimer(prevTime => {
                     if (prevTime <= 1) {
                         clearInterval(interval);
+                        localStorage.clear()
                         window.location.reload(); 
                         return 0;
                     }
@@ -39,7 +29,6 @@ export default function Exhibition() {
             return () => clearInterval(interval); 
         }, []);
         
-
         const formatTime = (seconds) => {
             const minutes = Math.floor(seconds / 60);
             const remainingSeconds = seconds % 60;
@@ -63,13 +52,17 @@ export default function Exhibition() {
     
     return (
         <div className={`flex flex-col items-center justify-center py-3 ${darkMode ? 'dark-mode' : 'bg-gray-200'}`}>
+        {artworkCollection.length > 0 && (
+            <>
             <h1 className="text-2xl">
             Warning: {formatTime(timer)} left in this session
             </h1>
             <h2 className={`text-xl ${timer <= 60 ? 'text-red-600 animate-pulse' : 'text-gray-700'}`}>
             All selected artworks will be removed when the session ends
             </h2>
-            <button className="mt-3" onClick={toggleDarkMode}><MdOutlineLightMode className="text-4xl"/></button>
+            </>
+        )}
+            <button className="mt-3" onClick={toggleDarkMode}><MdOutlineLightMode className="text-4xl hover:text-yellow-500"/></button>
             <ExhibitionSwiper artworks={artworkCollection} onDelete={deleteArtwork} darkMode={darkMode} />
         </div>
     )

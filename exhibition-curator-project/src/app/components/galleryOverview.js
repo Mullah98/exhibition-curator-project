@@ -1,7 +1,6 @@
 'use client';
 import HomeCardSlider from "./homeCardSlider";
 import ArtworkCollection from "./artworkCollection";
-import LoadingSpinner from "../ui/loading";
 import SingleArtwork from "./singleArtwork";
 
 export default function GalleryOverview({ title }) {

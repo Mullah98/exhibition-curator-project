@@ -17,7 +17,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
     const [activeIndex, setActiveIndex] = useState(0)
 
     if (!artworks || artworks.length === 0) {
-        return <div className='flex items-center justify-center mt-32'>
+        return <div className='h-[calc(92vh-100px)] overflow-auto items-center justify-center'>
         <div className='text-center p-6 border border-gray-300 rounded-lg shadow-lg'>
             <h2 className="text-3xl sm:text-4xl font-bold text-red-600 mb-4">
                 No Artworks Selected
@@ -39,7 +39,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
 
      <div className='w-full md:w-3/4 pr-4'>
         <Swiper 
-        style={{'--swiper-navigation-color': '#000', '--swiper-navigation-color': '#000'}}
+        style={{  '--swiper-navigation-color': darkMode ? '#fff' : '#000',}}
         loop={true}
         spaceBetween={5}
         navigation={true}

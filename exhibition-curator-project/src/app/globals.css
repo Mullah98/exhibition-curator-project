@@ -101,9 +101,7 @@ body {
 
 .ambient-light-effect {
   position: relative;
-  /* background: radial-gradient(to right, rgba(245, 241, 241, 0), rgba(245, 245, 245, 0.7) 50%, rgba(245, 241, 241, 0)); */
-  background: radial-gradient(circle, rgba(245, 245, 245, 0.9) 20%, rgba(245, 245, 245, 0) 60%);
-  backdrop-filter: blur(12px);
+  background: radial-gradient(circle, rgba(245, 245, 245, 0.9) 18%, rgba(245, 245, 245, 0) 50%);
 }
 
 .dark-mode {
