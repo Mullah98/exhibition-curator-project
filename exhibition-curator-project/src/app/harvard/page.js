@@ -2,12 +2,11 @@
 import { useEffect, useState } from "react"
 import SearchBar from "../ui/searchbar"
 import { fetchImagesFromHarvard, fetchImagesFromHarvardByDepartment } from "../utils/harvardApi"
-// import LoadingSpinner from "../ui/loading"
 import Card from "../ui/card"
 import LoadingCard from "../ui/loadingcard"
 import Modal from "../ui/modal"
 
-export default function Artworks() {
+export default function HarvardArtworks() {
     const [allArtworks, setAllArtworks] = useState([])
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(true)

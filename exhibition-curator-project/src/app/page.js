@@ -10,16 +10,15 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen">
+    <div className="flex flex-col items-center justify-start">
       {!isEntered && (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center pb-12">
           <h1 className="text-4xl sm:text-8xl font-medium font-serif transition-opacity duration-700 transform translate-y-4 opacity-100 animate-fade-in">
             Welcome to Exhibit Ease
           </h1>
           <button
             onClick={handleEnterClick}
-            className="mt-4 px-6 py-2 bg-gray-700 text-white rounded hover:bg-gray-400"
-          >
+            className="mt-4 px-6 py-2 bg-gray-700 text-white rounded hover:bg-gray-400">
             Enter
           </button>
         </div>

@@ -6,7 +6,7 @@ import { MdOutlineLightMode } from "react-icons/md";
 export default function Exhibition() { 
         const [artworkCollection, setArtworkCollection] = useState([])
         const [timer, setTimer] = useState(1800)
-        const [darkMode, setDarkMode] = useState(true);
+        const [darkMode, setDarkMode] = useState(false);
 
         useEffect(() => {
             const collection = JSON.parse(localStorage.getItem('artworks')) || [];
