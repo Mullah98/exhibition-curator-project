@@ -66,14 +66,3 @@ export const SearchImagesFromHarvard = async(query) => {
         return []
     }
 }
-
-// export const fetchPromises = () => {
-//     const objectIDs = [317877, 438003, 551786, 436492, 472562] 
-  
-//     return Promise.all(
-//       objectIDs.map(id =>
-//         fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`)
-//           .then(response => response.json())
-//       )
-//     );
-//   };

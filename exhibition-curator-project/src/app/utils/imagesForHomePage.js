@@ -1,6 +1,5 @@
 const harvard_apiKey = '57c592c3-71a8-4c92-bda9-a4b0215968ec';
 
-
 const fetchImagesFromHarvard = async(url) => {
     const response = await fetch(url);
     const result = await response.json();
