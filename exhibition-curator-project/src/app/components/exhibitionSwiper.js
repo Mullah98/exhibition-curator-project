@@ -12,7 +12,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/free-mode'
 import 'swiper/css/thumbs'
 
-export default function ExhibitionSwiper({artworks, onDelete}) {
+export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
     const [activeIndex, setActiveIndex] = useState(0)
 
@@ -30,14 +30,11 @@ export default function ExhibitionSwiper({artworks, onDelete}) {
             </div>
         </div>
         </div>
-    }
-
-    console.log(artworks);
-    
+    }    
 
   return (
-     <section className='py-12 w-full flex justify-center items-center'>
-     <div className='container mt-12'>
+     <section className={`w-full flex justify-center items-center py-5 ${darkMode ? 'ambient-light-effect' : ''}`}>
+     <div className='container mt-10 shadow-lg rounded-lg'>
      <div className='flex flex-col md:flex-row'>
 
      <div className='w-full md:w-3/4 pr-4'>
@@ -48,7 +45,7 @@ export default function ExhibitionSwiper({artworks, onDelete}) {
         navigation={true}
         thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className='h-[600px] w-full rounded-lg'
+        className='h-[600px] w-full rounded-lg  gold-frame'
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
         {artworks?.map((art) => (
@@ -58,47 +55,48 @@ export default function ExhibitionSwiper({artworks, onDelete}) {
                 alt={art?.title} 
                 fill 
                 sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
-                className='object-contain border-4 border-yellow-700' />
+                className='object-contain' />
             </SwiperSlide>
         ))}
         </Swiper>
         </div>
         <div className='w-full md:w-1/4 pl-4 flex flex-col items-center text-4xl sm:text-2xl md:text-2xl text-center'>
-            <button className='mt-2 sm:mb-2 p-2 hover:bg-red-500 hover:text-white hover:rounded-lg border border-transparent transition-all duration-300' onClick={() => onDelete(artworks[activeIndex])}>
+            <button className='mt-2 sm:mb-2 p-2 hover:bg-red-500 hover:text-white hover:rounded-lg border border-transparent transition-all duration-300'
+            onClick={() => onDelete(artworks[activeIndex])}>
             <IoTrashOutline className='text-2xl'/>
             </button>
-            <h2 className='text-2xl sm:text-4xl text-center'>{artworks[activeIndex]?.title || 'no title found'}</h2>
-            <h3 className='text-2xl sm:text-4xl text-gray-500'>{artworks[activeIndex]?.objectnumber || 'object number not found'}</h3>
+            <h2 className='text-2xl sm:text-3xl text-center'>{artworks[activeIndex]?.title || 'no title found'}</h2>
+            <h3 className='text-2xl sm:text-3xl text-gray-500'>{artworks[activeIndex]?.objectnumber || 'object number not found'}</h3>
             {artworks[activeIndex]?.classification && 
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].classification}
             </h3>}
             {artworks[activeIndex]?.description &&
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].description}
             </h3>}
             {artworks[activeIndex]?.peoplecount !== 0 &&
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].people[0].displayname}
             </h3>}
             {artworks[activeIndex]?.dated &&
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].dated}
             </h3>}
             {artworks[activeIndex]?.dimensions &&
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-lg sm:text-xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].dimensions}
             </h3>}
             {artworks[activeIndex]?.period &&
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].period}
             </h3>}
             {artworks[activeIndex]?.department &&
-            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-3'>
+            <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].department}
             </h3>}
             {artworks[activeIndex]?.url && 
-            <h3 className='text-xl sm:text-2xl text-center border-b border-gray-300 border-gray-300 py-3 whitespace-pre-wrap'>
+            <h3 className='text-lg sm:text-xl text-center border-b border-gray-300 border-gray-300 py-2 whitespace-pre-wrap'>
             Find out more about the artwork
             <span>
              <strong>

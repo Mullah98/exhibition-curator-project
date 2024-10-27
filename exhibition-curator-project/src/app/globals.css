@@ -88,6 +88,28 @@ body {
   .animate-title-move-up {
     animation: title-move-up 1s ease forwards;
   }
+
+  .gold-frame {
+    border: 10px solid gold;
+    border-image: linear-gradient(to bottom, #d4af37, #b8860b) 1;
+    border-radius: 8px;
+  }
+
+  .shadow-lg {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.ambient-light-effect {
+  position: relative;
+  /* background: radial-gradient(to right, rgba(245, 241, 241, 0), rgba(245, 245, 245, 0.7) 50%, rgba(245, 241, 241, 0)); */
+  background: radial-gradient(circle, rgba(245, 245, 245, 0.9) 20%, rgba(245, 245, 245, 0) 60%);
+  backdrop-filter: blur(12px);
+}
+
+.dark-mode {
+  background-color: #121111;
+  color: white;
+}
   
 }
 
