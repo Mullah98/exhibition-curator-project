@@ -35,7 +35,6 @@ export default function Exhibition() {
             return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
         };
     
-
         const deleteArtwork = (artwork) => {
             const confirmOption = window.confirm('Are you sure you want to remove the artwork?')
 
@@ -55,7 +54,7 @@ export default function Exhibition() {
         {artworkCollection.length > 0 && (
             <>
             <h1 className="text-2xl">
-            Warning: {formatTime(timer)} left in this session
+            Warning: {formatTime(timer)} minutes left in this session
             </h1>
             <h2 className={`text-xl ${timer <= 60 ? 'text-red-600 animate-pulse' : 'text-gray-700'}`}>
             All selected artworks will be removed when the session ends
