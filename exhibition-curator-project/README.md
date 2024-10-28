@@ -1,7 +1,10 @@
 # Exhibition Curator Project
-The Exhibition Curator project is a web application that allows users to explore artworks from the Harvard Art Museums and the MET Museum. Users can search, filter, and curate a personalized exhibition of selected artworks, which can be viewed as a slideshow. This project aims to provide an engaging platform for art lovers, researchers, and students to access and learn about various artworks.
+The Exhibition Curator project is a web application that allows users to explore artworks from the Harvard Art Museums and the MET Museum. Users can search, filter, and curate a personalized exhibition of selected artworks, which can be viewed as a slideshow.
 
-# Built with Nextjs, React and Tailwind css
+# Built with 
+- `Next.js`
+- `React`
+- `Tailwind CSS`
 
 # Features
 - `View Artworks:` Access and browse artworks from the Harvard and MET museums.
@@ -16,17 +19,15 @@ The Exhibition Curator project is a web application that allows users to explore
 
 # Installation
 - `Clone the repository:`
-bash
-Copy code
+Fork the repository
 git clone <repository-url>
-cd exhibition-curator
+cd exhibition-curator-project
 
 - `Install dependencies:`
-bash
 Copy code
 npm install
 
-- `Create a .env.local file in the root of the project and add your API keys:`
+- `Create a .env.local file in the root of the project and add your API key:`
 `You will need to request an api key from [***https://harvardartmuseums.org/collections/api](https://harvardartmuseums.org/collections/api)`
 makefile
 Copy code
