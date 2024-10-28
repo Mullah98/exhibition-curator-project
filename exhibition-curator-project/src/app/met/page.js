@@ -1,10 +1,11 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { fetchImagesFromMet } from "../utils/metApi"
+import { fetchImagesFromMet, fetchImagesFromMetByDepartment, searchImagesFromMet } from "../utils/metApi"
 import LoadingCard from "../ui/loadingcard"
 import Card from "../ui/card"
 import Modal from "../ui/modal"
+import SearchBar2 from "../ui/searchbar2"
 
 export default function MetArtworks() {
     const [allArtworks, setAllArtworks] = useState([])
@@ -12,6 +13,7 @@ export default function MetArtworks() {
     const [loading, setLoading] = useState(true)
     const [showModal, setShowModal] = useState(false)
     const [selectedArtwork, setSelectedArtwork] = useState([])
+    const [searchResults, setSearchResults] = useState([])
 
     useEffect(() => {
         const getAllArtworks = async() => {
@@ -35,11 +37,16 @@ export default function MetArtworks() {
         setShowModal(!showModal)        
     }
 
-    // console.log(allArtworks);
-    
+    const handleFilter = async (query) => {
+        setLoading(true)
+        const filtered = await searchImagesFromMet(query)        
+        setAllArtworks(filtered)
+        setLoading(false)
+    }    
 
     return (
         <>
+        <SearchBar2 searchTerm={search} setSearch={setSearch} handleFilter={handleFilter} setFilteredArtworks={setSearchResults} setLoading={setLoading} />
         <div className="flex justify-center align-center p-2 text-lg">
         Showing <span className="font-semibold mx-1">{allArtworks.length}</span> objects
         </div>
@@ -48,7 +55,7 @@ export default function MetArtworks() {
                 <LoadingCard />
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 p-8 max-w-screen-xl">
-                {allArtworks.map(art => (
+                {(searchResults.length > 0 ? searchResults : allArtworks).map(art => (
                     <Card key={art.objectID} image={art.primaryImage} title={art.title} handleShowModal={() => handleShowModal(art)} />
                 ))}
                 </div>

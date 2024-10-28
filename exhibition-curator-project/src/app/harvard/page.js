@@ -35,9 +35,11 @@ export default function HarvardArtworks() {
         setShowModal(!showModal)        
     }
 
-    const handleFilter = async (classification, culture, century, technique, medium) =>{
+    const handleFilter = async (classification, culture, century, technique, medium) => {
+        setLoading(true)
         const filtered = await fetchImagesFromHarvardByDepartment(classification, culture, century, technique, medium)
         setAllArtworks(filtered)
+        setLoading(false)
     }
 
     return (

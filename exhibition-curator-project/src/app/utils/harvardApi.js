@@ -38,7 +38,7 @@ export const fetchImagesFromHarvardByDepartment = async (classification, culture
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            throw new error('Bad req')
+            throw new Error('Bad request')
         }
         const data = await response.json();
         const artworks = data.records.filter(record => record.imagecount > 0 && record.primaryimageurl)
