@@ -3,7 +3,6 @@ import { getCollections } from "../utils/getCollections";
 import Image from "next/image";
 import LoadingSpinner from "../ui/loading";
 
-
 export default function ArtworkCollection() {
     const [allCollections, setAllCollections] = useState([])
     const [loading, setLoading] = useState(true)
@@ -51,12 +50,11 @@ export default function ArtworkCollection() {
                     {collection.department}
                     </h3>
                     </div>
-                    
                     </div>
                 ))}
                 </div>
-        </>
-        )}
+            </>
+            )}
         </div>
     )
 }

@@ -14,7 +14,6 @@ export default function HomeCardSlider() {
     const [gallery, setGallery] = useState([])
     const [loading, setLoading] = useState(true)
 
-
     useEffect(() => {
         const fetchImages = async () => {
             try {
