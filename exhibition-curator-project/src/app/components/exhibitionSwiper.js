@@ -95,7 +95,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].department}
             </h3>}
-            {artworks[activeIndex]?.url || artworks[activeIndex]?.objectURL && 
+            {artworks[activeIndex]?.url || artworks[activeIndex]?.objectURL ? ( 
             <h3 className='text-lg sm:text-xl text-center border-b border-gray-300 border-gray-300 py-2 whitespace-pre-wrap'>
             Find out more about the artwork
             <span>
@@ -107,7 +107,8 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
               </a>
              </strong>
             </span>
-            </h3>}
+            </h3> ) : null}
+
         </div>
         </div>
         
