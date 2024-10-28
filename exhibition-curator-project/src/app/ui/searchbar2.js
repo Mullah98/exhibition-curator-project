@@ -4,18 +4,15 @@ import { searchImagesFromMet } from "../utils/metApi";
 
 export default function SearchBar2({search, setSearch, handleFilter, setFilteredArtworks, setLoading}) {
     const material = ['Acrylic', 'Albums', 'Beads', 'Books', 'Bronze', 'Canvas', 'Ceramics', 'Chalk', 'Charcoal', 'Clay', 'Costume', 'Cups', 'Drawings', 'Engraving', 'Figures', 'Gold', 'Glazing', 'Illuminated manuscripts', 'Ink', 'Limestone', 'Oil', 'Oil paintings', 'Paintings', 'Prints', 'Textiles', 'Watercolors', 'Wood']
-    const century = []
+    const department = ['The American Wing', 'Arms and Armor', 'Asian Art', 'Drawings and Prints', 'Egyptian Art', 'European Paintings', 'Islamic Art', 'Medieval Art', 'Musical Instruments', 'Photographs', 'Robert Lehman Collection']
+    const culture = ['African', 'American', 'Arab', 'British', 'Chinese', 'Dutch', 'Egyptian', 'French', 'German', 'Greek', 'Indian', 'Indigenous', 'Italian', 'Japanese', 'Korean', 'Mexican', 'Persian', 'Russian', 'Spanish']
     const [dropdown1, setDropdown1] = useState('');
-    // const [dropdown2, setDropdown2] = useState('');
-    // const [dropdown3, setDropdown3] = useState('');
-    // const [dropdown4, setDropdown4] = useState('');
-    // const [dropdown5, setDropdown5] = useState('');
     const [clickFilterBtn, setClickFilterBtn] = useState(false)
 
     const handleChange = async (e) => {
         setSearch(e.target.value)
 
-        if (e.target.value && e.target.value.length >= 4) {
+        if (e.target.value && e.target.value.length >= 6) {
             setLoading(true)
             const results = await searchImagesFromMet(e.target.value)
             console.log(results);
@@ -33,10 +30,6 @@ export default function SearchBar2({search, setSearch, handleFilter, setFiltered
 
     const handleClearButton = () => {
         setDropdown1('')
-        // setDropdown2('')
-        // setDropdown3('')
-        // setDropdown4('')
-        // setDropdown5('')
     }
   
     return (
@@ -70,6 +63,24 @@ export default function SearchBar2({search, setSearch, handleFilter, setFiltered
                             className="w-34 sm:w-52 p-2 mb-1 text-center border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer">
                             <option value="">Material</option>
                             {material.map((value, i) => (
+                                <option key={i} value={value}>{value}</option>
+                            ))}
+                        </select>
+                        <select 
+                            value={dropdown1} 
+                            onChange={(e) => setDropdown1(e.target.value)} 
+                            className="w-34 sm:w-52 p-2 mb-1 text-center border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer">
+                            <option value="">Culture</option>
+                            {culture.map((value, i) => (
+                                <option key={i} value={value}>{value}</option>
+                            ))}
+                        </select>
+                        <select 
+                            value={dropdown1} 
+                            onChange={(e) => setDropdown1(e.target.value)} 
+                            className="w-34 sm:w-52 p-2 mb-1 text-center border rounded-md border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer">
+                            <option value="">Department</option>
+                            {department.map((value, i) => (
                                 <option key={i} value={value}>{value}</option>
                             ))}
                         </select>

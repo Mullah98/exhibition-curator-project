@@ -24,32 +24,11 @@ export const fetchImagesFromMet = async() => {
         const ids = await fetchMetIds();
         if (!ids) return;
         const metImages = await fetchPromises(ids, metUrl)
-        // console.log('from api', metImages);        
         return metImages;
     } catch(error) {
         console.log('Unable to get images', error);
     }
 }
-
-// export const fetchImagesFromMetByDepartment = async (medium) => {
-//     let url = `https://collectionapi.metmuseum.org/public/collection/v1`
-
-//     if (medium) {
-//         url += `/search?q=${medium}&hasImages=true`
-//     }
-
-//     try {
-//         const response = await fetch(url)
-//         if (!response.ok) {
-//             throw new Error('Bad request')
-//         }
-//         const data = await response.json();
-//         console.log(data);
-//         return data
-//     } catch (error) {
-//         console.log('No response', error)
-//     }
-// }
 
 
 export const searchImagesFromMet = async (query) => {
@@ -65,8 +44,6 @@ export const searchImagesFromMet = async (query) => {
 
         if (objectIds.length > 0) {
             const artworks = await fetchPromises(objectIds, 'https://collectionapi.metmuseum.org/public/collection/v1/objects')
-            console.log(url);
-            
             return artworks
         } else {
             return [];
