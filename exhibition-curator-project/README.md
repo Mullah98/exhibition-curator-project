@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Exhibition Curator Project
+The Exhibition Curator project is a web application that allows users to explore artworks from the Harvard Art Museums and the MET Museum. Users can search, filter, and curate a personalized exhibition of selected artworks, which can be viewed as a slideshow. This project aims to provide an engaging platform for art lovers, researchers, and students to access and learn about various artworks.
 
-## Getting Started
+# Built with Nextjs, React and Tailwind css
 
-First, run the development server:
+# Features
+- `View Artworks:` Access and browse artworks from the Harvard and MET museums.
+- `Search and Filter:` Use dropdown menus and a search bar to filter artworks based on various criteria.
+- `Curate Exhibitions:` Add selected artworks to a personalized exhibition page, which can be viewed as a slideshow.
+- `External Links:` Click on links to view detailed information about the artworks on external pages.
+- `Temporary Storage:` Artworks added to the exhibition are automatically deleted after 30 minutes.
 
-```bash
+# Prerequisites
+- Node.js (version 14 or later)
+- npm (version 5.6 or later)
+
+# Installation
+- `Clone the repository:`
+bash
+Copy code
+git clone <repository-url>
+cd exhibition-curator
+
+- `Install dependencies:`
+bash
+Copy code
+npm install
+
+- `Create a .env.local file in the root of the project and add your API keys:`
+`You will need to request an api key from [***https://harvardartmuseums.org/collections/api](https://harvardartmuseums.org/collections/api)`
+makefile
+Copy code
+NEXT_PUBLIC_HARVARD_API_KEY=<your-harvard-api-key>
+NEXT_PUBLIC_MET_API_KEY=<your-met-api-key>
+
+- `Start the development server:`
+bash
+Copy code
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `Open your browser and navigate to http://localhost:3000.`
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# Usage
+- View artowork collections from Harvard and Met Museum
+- Use searchbar and dropwdown menus to filter through artworks
+- Select artworks and add them to personal collection
+- View all selected artworks in Exhibition page
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Extra features
+- Toggle dark mode in Exhibition page
+- Delete artworks from Exhibition page
+- Adjusted for mobile responsiveness
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

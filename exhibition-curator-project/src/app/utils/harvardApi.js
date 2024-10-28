@@ -1,4 +1,4 @@
-const harvard_API_KEY = '57c592c3-71a8-4c92-bda9-a4b0215968ec';
+const harvard_API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 export const fetchImagesFromHarvard = async() => {
     const url = `https://api.harvardartmuseums.org/object?apikey=${harvard_API_KEY}&size=150&classification=Drawings`;
