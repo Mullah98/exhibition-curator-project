@@ -22,18 +22,26 @@ export default function Modal({handleShowModal, selectedArtwork}) {
 
     const checkForArtwork = (artwork) => {
         const storedItems = JSON.parse(localStorage.getItem('artworks')) || [];
-        setAlreadyAdded(storedItems.some(item => item.id === artwork.id))
-    }
-
+        const artworkIdWithPrefix = artwork.id ? `harvard-${artwork.id}` : `met-${artwork.objectID}`;
+        setAlreadyAdded(
+            storedItems.some(item => item.uniqueId === artworkIdWithPrefix)
+        );
+    };
+    
     const handleClick = (artwork) => {
         const existingCollection = JSON.parse(localStorage.getItem('artworks')) || [];
         if (alreadyAdded) return;
-
-        existingCollection.push(artwork);
+        
+        const uniqueId = artwork.id ? `harvard-${artwork.id}` : `met-${artwork.objectID}`;
+        existingCollection.push({
+            ...artwork,
+            uniqueId
+        });
+        
         localStorage.setItem('artworks', JSON.stringify(existingCollection));
-        setAlreadyAdded(true)        
-    } 
-
+        setAlreadyAdded(true);
+    };    
+    
     return (
         <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm">
             <div className="relative w-[80%] h-[80%] flex bg-white rounded-lg overflow-hidden"

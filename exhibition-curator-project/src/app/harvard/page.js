@@ -24,7 +24,6 @@ export default function HarvardArtworks() {
         { label: 'Artist Z-A', value: 'artist-z-a' },
     ];
 
-
     useEffect(() => {
         const getAllArtworks = async() => {
             try {
@@ -73,9 +72,15 @@ export default function HarvardArtworks() {
         const sorted = sortedArtworks();       
         setAllArtworks(sorted);
     }, [sortOption, searchResults]);
+
     const handleFilter = async (classification, culture, century, technique, medium) =>{
         const filtered = await fetchImagesFromHarvardByDepartment(classification, culture, century, technique, medium)
         setAllArtworks(filtered)
+    }
+
+    const handleShowModal = (artwork) => {
+        setSelectedArtwork(artwork)
+        setShowModal(!showModal)        
     }
 
     const handleSort = (e) => {
@@ -87,7 +92,7 @@ export default function HarvardArtworks() {
         <SearchBar searchTerm={search} setSearch={setSearch} handleFilter={handleFilter} setFilteredArtworks={setSearchResults} />
         <div className="flex flex-col sm:flex-row justify-center items-center p-2 text-lg">
                 <span>
-                    Showing <span className="font-semibold mx-1">{allArtworks.length}</span> objects
+                    Showing<span className="font-semibold mx-1">{allArtworks.length}</span>objects
                 </span>
                 <div className="mt-2 sm:mt-0 sm:ml-2">
                     <select

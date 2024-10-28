@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { fetchImagesFromMet, fetchImagesFromMetByDepartment, searchImagesFromMet } from "../utils/metApi"
+import { fetchImagesFromMet, searchImagesFromMet } from "../utils/metApi"
 import LoadingCard from "../ui/loadingcard"
 import Card from "../ui/card"
 import Modal from "../ui/modal"

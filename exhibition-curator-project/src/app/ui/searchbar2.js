@@ -12,7 +12,7 @@ export default function SearchBar2({search, setSearch, handleFilter, setFiltered
     const handleChange = async (e) => {
         setSearch(e.target.value)
 
-        if (e.target.value && e.target.value.length >= 6) {
+        if (e.target.value && e.target.value.length >= 3) {
             setLoading(true)
             const results = await searchImagesFromMet(e.target.value)
             console.log(results);

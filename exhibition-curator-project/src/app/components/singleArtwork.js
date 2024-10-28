@@ -37,7 +37,7 @@ export default function SingleArtwork() {
             <p className="text-xl mt-2 animate-fade-in-left">
                 Explore a stunning collection of artworks that inspire and captivate.
             </p>
-            <Link href="/artworks" 
+            <Link href="/harvard" 
             className="text-lg text-blue-300 underline hover:text-blue-400 animate-fade-in-left">
                 View the full collection
             </Link>

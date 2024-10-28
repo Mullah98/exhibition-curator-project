@@ -37,7 +37,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
      <div className='container mt-10 shadow-lg rounded-lg'>
      <div className='flex flex-col md:flex-row'>
 
-     <div className='w-full md:w-3/4 pr-4'>
+     <div className='relative w-full md:w-3/4 pr-4'>
         <Swiper 
         style={{  '--swiper-navigation-color': darkMode ? '#fff' : '#000',}}
         loop={true}
@@ -53,20 +53,20 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
                 <Image 
                 src={art?.primaryimageurl || art?.primaryImage} 
                 alt={art?.title} 
-                fill 
+                fill
                 sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
                 className='object-contain' />
             </SwiperSlide>
         ))}
         </Swiper>
         </div>
-        <div className='w-full md:w-1/4 pl-4 flex flex-col items-center text-4xl sm:text-2xl md:text-2xl text-center'>
+        <div className='relative w-full md:w-1/4 pl-4 flex flex-col items-center text-4xl sm:text-2xl md:text-2xl text-center'>
             <button className='mt-2 sm:mb-2 p-2 hover:bg-red-500 hover:text-white hover:rounded-lg border border-transparent transition-all duration-300'
             onClick={() => onDelete(artworks[activeIndex])}>
             <IoTrashOutline className='text-2xl'/>
             </button>
             <h2 className='text-2xl sm:text-3xl text-center'>{artworks[activeIndex]?.title || 'no title found'}</h2>
-            <h3 className='text-2xl sm:text-3xl text-gray-500'>{artworks[activeIndex]?.objectnumber || artworks[activeIndex]?.objectID || 'object number not found'}</h3>
+            <h3 className='text-2xl sm:text-2xl text-gray-500'>{artworks[activeIndex]?.objectnumber || artworks[activeIndex]?.objectID || 'object number not found'}</h3>
             {artworks[activeIndex]?.classification && 
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].classification}
@@ -124,14 +124,15 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
         {artworks?.map((art, i) => (
             <SwiperSlide 
             key={art.id || art.objectID} 
-            className={`flex items-center justify-center ${i === activeIndex ? 'border-4 border-blue-200 rounded-md' : ''}`}>
+            className={`relative flex items-center justify-center ${i === activeIndex ? 'border-4 border-blue-200 rounded-md' : ''}`}>
                 <button className='flex h-full w-full items-center justify-center'>
                     <Image 
                     src={art?.primaryimageurl || art?.primaryImage} 
                     alt={art.title} 
-                    fill 
+                    fill
                     sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
-                    className='object-cover' />
+                    className='object-cover'
+                    priority />
                 </button>
             </SwiperSlide>
         ))}
