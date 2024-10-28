@@ -27,8 +27,9 @@ cd exhibition-curator-project
 Copy code
 npm install
 
-- `Create a .env.local file in the root of the project and add your API key:`
-`You will need to request an api key from [***https://harvardartmuseums.org/collections/api](https://harvardartmuseums.org/collections/api)`
+- `Create a `.env.local` file in the root of the project and add your API key:`
+You will need to request an API key from [Harvard Art Museums API](https://harvardartmuseums.org/collections/api).
+
 makefile
 Copy code
 NEXT_PUBLIC_HARVARD_API_KEY=<your-harvard-api-key>
