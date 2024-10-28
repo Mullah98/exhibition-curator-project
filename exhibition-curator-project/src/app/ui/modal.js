@@ -43,8 +43,8 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                         <Skeleton className="h-full w-full bg-gray-300 animation-pulse" />
                     ) : (
                         <Image
-                        src={selectedArtwork.primaryimageurl}
-                        alt={`Image for ${selectedArtwork.id}`}
+                        src={selectedArtwork.primaryimageurl || selectedArtwork.primaryImage}
+                        alt={`Image for ${selectedArtwork.id || selectedArtwork.objectID}`}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-contain"
@@ -64,7 +64,7 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                             <div className="space-y-1">
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Object Number</strong>
-                                    <p>{selectedArtwork.objectnumber}</p>
+                                    <p>{selectedArtwork.objectnumber || selectedArtwork.objectID || ''}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Classification</strong>
@@ -72,7 +72,7 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Department</strong>
-                                    <p>{selectedArtwork.description || 'unknown'}</p>
+                                    <p>{selectedArtwork.description || selectedArtwork.department || 'unknown'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Culture</strong>
@@ -80,7 +80,7 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Description</strong>
-                                    <p>{selectedArtwork.description || 'unknown'}</p>
+                                    <p>{selectedArtwork.description || 'n/a'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Medium</strong>
@@ -96,15 +96,15 @@ export default function Modal({handleShowModal, selectedArtwork}) {
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2 overflow-x-auto max-h-16">
                                     <strong className="mr-2">Credit Line</strong>
-                                    <p className="whitespace-nowrap">{selectedArtwork.creditline || 'unknown'}</p>
+                                    <p className="whitespace-nowrap">{selectedArtwork.creditline || selectedArtwork.creditLine || 'unknown'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Century</strong>
-                                    <p>{selectedArtwork.century || 'unknown'}</p>
+                                    <p>{selectedArtwork.century || selectedArtwork.objectDate || 'unknown'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2">
                                     <strong className="mr-2">Dated</strong>
-                                    <p>{selectedArtwork.dated || 'unknown'}</p>
+                                    <p>{selectedArtwork.dated || selectedArtwork.accessionYear || 'unknown'}</p>
                                 </div>
                                 <div className="flex justify-between items-center border-b border-gray-300 py-2 overflow-x-auto max-h-16">
                                     <strong className="mr-2">Contact</strong>

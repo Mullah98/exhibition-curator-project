@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { SearchImagesFromHarvard } from "../utils/harvardApi"
 
 export default function SearchBar({search, setSearch, handleFilter, setFilteredArtworks}) {

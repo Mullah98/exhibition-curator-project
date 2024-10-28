@@ -24,7 +24,7 @@ export default function HarvardArtworks() {
                     setLoading(false)
                 }
             } catch(error) {
-                console.log('Cannot get all artworks', error);
+                console.log('Cannot get all artworks from Harvard museum', error);
             }
         };
         getAllArtworks()

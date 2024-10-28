@@ -49,9 +49,9 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         >
         {artworks?.map((art) => (
-            <SwiperSlide key={art.id}>
+            <SwiperSlide key={art.id || art.objectID}>
                 <Image 
-                src={art?.primaryimageurl} 
+                src={art?.primaryimageurl || art?.primaryImage} 
                 alt={art?.title} 
                 fill 
                 sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
@@ -66,7 +66,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
             <IoTrashOutline className='text-2xl'/>
             </button>
             <h2 className='text-2xl sm:text-3xl text-center'>{artworks[activeIndex]?.title || 'no title found'}</h2>
-            <h3 className='text-2xl sm:text-3xl text-gray-500'>{artworks[activeIndex]?.objectnumber || 'object number not found'}</h3>
+            <h3 className='text-2xl sm:text-3xl text-gray-500'>{artworks[activeIndex]?.objectnumber || artworks[activeIndex]?.objectID || 'object number not found'}</h3>
             {artworks[activeIndex]?.classification && 
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].classification}
@@ -75,13 +75,13 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].description}
             </h3>}
-            {artworks[activeIndex]?.peoplecount !== 0 &&
+            {artworks[activeIndex]?.peoplecount !== 0 || artworks[activeIndex]?.artistDisplayName &&
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].people[0].displayname}
             </h3>}
-            {artworks[activeIndex]?.dated &&
+            {artworks[activeIndex]?.dated || artworks[activeIndex]?.accessionYear &&
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
-            {artworks[activeIndex].dated}
+            {artworks[activeIndex].dated || artworks[activeIndex]?.accessionYear}
             </h3>}
             {artworks[activeIndex]?.dimensions &&
             <h3 className='text-lg sm:text-xl border-b border-gray-300 border-gray-300 py-2'>
@@ -95,12 +95,16 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
             <h3 className='text-xl sm:text-2xl border-b border-gray-300 border-gray-300 py-2'>
             {artworks[activeIndex].department}
             </h3>}
-            {artworks[activeIndex]?.url && 
+            {artworks[activeIndex]?.url || artworks[activeIndex]?.objectURL && 
             <h3 className='text-lg sm:text-xl text-center border-b border-gray-300 border-gray-300 py-2 whitespace-pre-wrap'>
             Find out more about the artwork
             <span>
              <strong>
-              <a href={artworks[activeIndex]?.url} className='cursor-pointer hover:underline' target='_blank' rel='noopener noreferrer'> here</a>
+              <a href={artworks[activeIndex]?.url  || artworks[activeIndex]?.objectURL } 
+              className='cursor-pointer hover:underline' 
+              target='_blank' 
+              rel='noopener noreferrer'> here
+              </a>
              </strong>
             </span>
             </h3>}
@@ -118,11 +122,11 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
         className='thumbs mt-3 h-32 w-full rounded-lg flex items-center justify-center'>
         {artworks?.map((art, i) => (
             <SwiperSlide 
-            key={art.id} 
+            key={art.id || art.objectID} 
             className={`flex items-center justify-center ${i === activeIndex ? 'border-4 border-blue-200 rounded-md' : ''}`}>
                 <button className='flex h-full w-full items-center justify-center'>
                     <Image 
-                    src={art?.primaryimageurl} 
+                    src={art?.primaryimageurl || art?.primaryImage} 
                     alt={art.title} 
                     fill 
                     sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
