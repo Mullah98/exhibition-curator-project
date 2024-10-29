@@ -30,10 +30,7 @@ npm install
 - `Create a `.env.local` file in the root of the project and add your API key:`
 You will need to request an API key from [Harvard Art Museums API](https://harvardartmuseums.org/collections/api).
 
-makefile
-Copy code
-NEXT_PUBLIC_HARVARD_API_KEY=<your-harvard-api-key>
-NEXT_PUBLIC_MET_API_KEY=<your-met-api-key>
+NEXT_PUBLIC_HARVARD_API_KEY=`your-harvard-api-key`
 
 - `Start the development server:`
 bash
