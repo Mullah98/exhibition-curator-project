@@ -43,7 +43,8 @@ export default function Modal({handleShowModal, selectedArtwork}) {
     };    
     
     return (
-        <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm">
+        <div className="fixed inset-0 flex items-center justify-center w-full h-full bg-black bg-opacity-50 backdrop-blur-sm"
+        onClick={handleShowModal}>
             <div className="relative w-[80%] h-[80%] flex bg-white rounded-lg overflow-hidden"
             onClick={(e) => e.stopPropagation()}>
                 <div className="w-1/2 h-full relative">

@@ -8,6 +8,11 @@ body {
 }
 
 @layer utilities {
+  .object-cover {
+    width: auto;
+    height: auto; 
+  }
+
   .text-balance {
     text-wrap: balance;
   }

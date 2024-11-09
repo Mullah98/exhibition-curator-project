@@ -40,7 +40,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
      <div className='relative w-full md:w-3/4 pr-4'>
         <Swiper 
         style={{  '--swiper-navigation-color': darkMode ? '#fff' : '#000',}}
-        loop={true}
+        loop={artworks.length > 8}
         spaceBetween={5}
         navigation={true}
         thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
@@ -50,12 +50,14 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
         >
         {artworks?.map((art) => (
             <SwiperSlide key={art.id || art.objectID}>
+             <div className='relative w-full h-full'>
                 <Image 
                 src={art?.primaryimageurl || art?.primaryImage} 
                 alt={art?.title} 
                 fill
-                sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className='object-contain' />
+             </div>
             </SwiperSlide>
         ))}
         </Swiper>
@@ -114,9 +116,9 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
         
         <Swiper 
         onSwiper={setThumbsSwiper}
-        loop={true}
+        loop={artworks.length > 8}
         spaceBetween={4}
-        slidesPerView={artworks.length}
+        slidesPerView={artworks.length > 8 ? 8 : artworks.length}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
@@ -126,6 +128,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
             key={art.id || art.objectID} 
             className={`relative flex items-center justify-center ${i === activeIndex ? 'border-4 border-blue-200 rounded-md' : ''}`}>
                 <button className='flex h-full w-full items-center justify-center'>
+                 <div className='relative w-full h-full'>
                     <Image 
                     src={art?.primaryimageurl || art?.primaryImage} 
                     alt={art.title} 
@@ -133,6 +136,7 @@ export default function ExhibitionSwiper({artworks, onDelete, darkMode}) {
                     sizes='(max-width: [768px]) 100vw, (max-width: 1200px) 50vw, 33vw' 
                     className='object-cover'
                     priority />
+                 </div>
                 </button>
             </SwiperSlide>
         ))}
