@@ -88,7 +88,7 @@ export default function HomeCardSlider() {
             <Slider {...settings}>
                 {gallery.map((artwork) => (
                     <div key={artwork.id} className="p-4 flex justify-center">
-                    <div className="relative w-full max-w-[220px] sm:max-w-xl h-72 sm:h-96 shadow-lg border rounded-lg overflow-hidden flex items-center justify-center border-grey-100 cursor-pointer"> 
+                    <div className="relative w-full max-w-[220px] sm:max-w-xl h-72 sm:h-96 shadow-lg border rounded-lg overflow-hidden flex items-center justify-center border-grey-100"> 
                     {artwork.image ? (
                         <Image
                         src={artwork.image} 

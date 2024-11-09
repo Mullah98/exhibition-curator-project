@@ -21,13 +21,13 @@ export default function ArtworkCollection() {
             }
         };
         fetchCollections();
-    }, [])    
+    }, [])
 
     return (
         <div className="flex flex-col items-center w-full max-w-[800px] mb-10">
             {loading ? (
                 <LoadingSpinner />
-            ): (
+            ): (    
             <>
             <h1 className="m-8 sm:m-10 md:m-12 lg:m-16 text-3xl sm:text-4xl md:text-5xl lg:text-5xl italic text-center text-gray-800 whitespace-normal md:whitespace-nowrap font-medium font-serif">
                 Explore a wide range of astonishing collections...
@@ -36,7 +36,7 @@ export default function ArtworkCollection() {
                 {allCollections.map(collection => (
                     <div 
                     key={collection.id}
-                    className="flex flex-col h-[420px] p-6 border border-gray-300 transition-transform duration-300 hover:scale-105 cursor-pointer">
+                    className="flex flex-col h-[420px] p-6 border border-gray-300 transition-transform duration-300 hover:scale-105">
                     <Image 
                     src={collection.image} 
                     alt={collection.department} 
@@ -46,7 +46,6 @@ export default function ArtworkCollection() {
 
                     <div className="border-t border-gray-300 pt-2 flex-grow-0">
                     <h3 className="text-lg font-bold text-center text-gray-800 mb-0 relative group whitespace-normal">
-                    <span className="absolute left-0 right-0 h-1 bg-black transform scale-x-0 transition-transform duration-300 hover:scale-x-100 origin-left group-hover:scale-x-100"></span>
                     {collection.department}
                     </h3>
                     </div>
