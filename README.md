@@ -40,9 +40,9 @@ npm run dev
 - `Open your browser and navigate to http://localhost:3000.`
 
 # Usage
-- View artowork collections from Harvard and Met Museum
+- View artwork collections from Harvard and Met Museum
 - Use searchbar and dropwdown menus to filter through artworks
-- Select artworks and add them to personal collection
+- Select artworks and add them to your personal collection
 - View all selected artworks in Exhibition page
 
 # Extra features
