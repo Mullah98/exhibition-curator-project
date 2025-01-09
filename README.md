@@ -50,3 +50,9 @@ npm run dev
 - Delete artworks from Exhibition page
 - Adjusted for mobile responsiveness
 
+# Challenges
+- `Handling Thousands of Images and Filtering-` Managing and displaying a large number of artworks from two different museums was challenging. I optimized the images by lazy-loading them and implementing pagination to avoid overwhelming the app and improve load time. With a large collection of artworks, filtering images by various criteria (e.g., type, artist, or time period) was a challenge. I implemented efficient filtering logic, utilizing React’s state management to update the display in real-time as users applied filters.
+
+- `Handling Loading Times and Showing Loading States-`With so many images being fetched from the APIs, managing loading times was critical. I used Shadcn to implement a loading skeleton for images, providing users with a smooth experience while the images were being fetched. This made the app feel more responsive during loading times.
+
+- `4-Week Deadline-` With a tight 4-week deadline to develop the project, I had to carefully plan the tasks and prioritize features. I focused on core functionalities first, then iterated on design and additional features. The deadline pushed me to stay organized and efficient throughout the development process.
